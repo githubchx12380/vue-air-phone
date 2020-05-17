@@ -1,11 +1,13 @@
 <template>
   <div class="city-select">
     <div>
-       <div class="city" @click="showPickerclick('dep')">{{dep}}</div>
-       <div><van-icon class="cityico" name="replay" /></div>
-       <div class="city" @click="showPickerclick('arr')">{{arr}}</div>
+       <div class="city animate__animated" @click="showPickerclick('dep')" :class="{animate__fadeOutRight:falg}">{{dep}}</div>
+        <div @click="exchange">
+              <van-icon  class="cityico animate__animated" name="replay" :class="{animate__wobble:falg}" />
+        </div>
+       <div class="city animate__animated" @click="showPickerclick('arr')" :class="{animate__fadeOutLeft:falg}">{{arr}}</div>
     </div>
-
+    <city-date />
 
     <van-popup v-model="showPicker" round position="bottom">
       <van-picker
@@ -17,20 +19,26 @@
     </van-popup>
 
       
+    <van-calendar v-model="show" :round="false" position="right" />
   </div>
 </template>
 
 <script>
 import { citylist } from '@/api/city.js'
+import CityDate from './CityDate'
 export default {
+  components:{
+    CityDate
+  },
   data() {
     return {
-        temp:0,
-        dep:'北京',
-        arr:'上海',
-        showPicker:false,
-        value: '',
-        columns:null
+        falg:false, //切换城市控制控制变量
+        temp:0,     //tab切换
+        dep:'北京', //默认出发
+        arr:'上海', //默认到达
+        showPicker:false, //选择城市
+        columns:null,  //城市列表
+        show:false, // 控制日期显示
     }
   },
   methods:{
@@ -40,8 +48,9 @@ export default {
         }else{
           this.temp = 1
         }
-        this.showPicker = true
+      
     },
+    //选择城市确认
     onConfirm(value) {
       if(!this.temp) {
         this.dep = value.text
@@ -49,12 +58,31 @@ export default {
         this.arr = value.text
       }
       this.showPicker = false
+    },
+    //控制动画
+    exchange() {
+      this.falg = true
+    },
+    //切换城市
+    exchangeCity() {
+      let dep = this.dep
+      let arr = this.arr
+      this.dep = arr
+      this.arr = dep
     } 
+  },
+  watch:{
+    falg() {
+      if(this.falg) {
+        setTimeout(() => {
+          this.falg = false
+          this.exchangeCity()
+        },800)
+      }
+    }
   },
   mounted() {
     citylist().then(res => {
-      console.log(res);
-      
       this.columns = res.data.data.map(item => {
         return {
           text:item.city,

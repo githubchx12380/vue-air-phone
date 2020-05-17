@@ -10,8 +10,11 @@ import store from './store'
 
 import Vant from 'vant';
 
+import animated from 'animate.css' 
+
 import 'vant/lib/index.css';
 
+Vue.use(animated)
 
 Vue.use(Vant);
 
