@@ -1,0 +1,11 @@
+*{
+    font-size: 4.167vw;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: PingFang SC,arial,helvetica,STHeitiSC-Light,Heiti SC,droidsansfallback,dengxian,microsoft yahei;
+    -webkit-font-smoothing: antialiased;
+}
+
