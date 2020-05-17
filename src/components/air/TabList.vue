@@ -2,9 +2,12 @@
   <div class="tab-list-box">
       <div class="tab-list">
           <div class="tab-list-item">
-              <div>国内</div>
-              <div>国际/中国港澳台</div>
-              <div>往返</div>
+              <div
+                v-for="(item,index) in ['国内','国际/中国港澳台','往返']"
+                :key="index"
+                :class="{listActive:currentIndex == index}"
+                @click="tabItemClick(index)"
+              >{{item}}</div>
           </div>
       </div>
   </div>
@@ -12,7 +15,16 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            currentIndex:0
+        }
+    },
+    methods:{
+        tabItemClick(index) {
+            this.currentIndex = index
+        }
+    }
 }
 </script>
 
@@ -37,7 +49,10 @@ export default {
             font-size: 3.611vw;
             align-items: center;
         }
-        .list-active{
+        .listActive{
+            color: #00bcd4;
+        }
+        .listActive::after{
                 position: absolute;
                 bottom: 1px;
                 left: 50%;
@@ -49,6 +64,7 @@ export default {
                 z-index: 1;
                 background: #00bcd4;
                 border-radius: 4px;
+                
         }
     }
 }
