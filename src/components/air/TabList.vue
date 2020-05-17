@@ -9,12 +9,20 @@
                 @click="tabItemClick(index)"
               >{{item}}</div>
           </div>
+          <city-select></city-select> 
       </div>
+
+      
+      
   </div>
 </template>
 
 <script>
+import CitySelect from '@/components/air/CitySelect.vue'
 export default {
+    components:{
+        CitySelect //城市查询
+    },
     data() {
         return {
             currentIndex:0
