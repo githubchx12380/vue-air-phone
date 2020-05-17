@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { citylist } from '@/api/city.js'
 export default {
   data() {
     return {
@@ -29,7 +30,7 @@ export default {
         arr:'上海',
         showPicker:false,
         value: '',
-        columns: [{text:'杭州'}, {text:'宁波'}, {text:'温州'}, {text:'嘉兴'}, {text:'湖州'},{text:'暂无其他城市机票',disabled: true}],
+        columns:null
     }
   },
   methods:{
@@ -49,6 +50,19 @@ export default {
       }
       this.showPicker = false
     } 
+  },
+  mounted() {
+    citylist().then(res => {
+      console.log(res);
+      
+      this.columns = res.data.data.map(item => {
+        return {
+          text:item.city,
+          citycode:item.citycode,
+        }
+      })
+      this.columns.push({text:'暂无其他城市机票',disabled: true})
+    })
   }
 }
 </script>
