@@ -1,13 +1,24 @@
 <template>
   <div class="city-select">
     <div>
-       <div class="city animate__animated" @click="showPickerclick('dep')" :class="{animate__fadeOutRight:falg}">{{dep}}</div>
+       <div class="city animate__animated" @click="showPickerclick('dep')" :class="{animate__fadeOutRight:falg}">{{model.dep}}</div>
         <div @click="exchange">
               <van-icon  class="cityico animate__animated" name="replay" :class="{animate__wobble:falg}" />
         </div>
-       <div class="city animate__animated" @click="showPickerclick('arr')" :class="{animate__fadeOutLeft:falg}">{{arr}}</div>
+       <div class="city animate__animated" @click="showPickerclick('arr')" :class="{animate__fadeOutLeft:falg}">{{model.arr}}</div>
     </div>
-    <city-date />
+
+    <city-date @depDateChange="res => model.depDate = res" />
+
+    <city-position @cabinPostion="res => model.cabinType = res" />
+
+    <van-button 
+        :block="true"
+        :round="true" 
+        color="linear-gradient(to right, #05e4db, #00bee1)"
+    >搜索</van-button>
+
+    <div class="city-cart"><van-icon class="comment-o" name="comment-o" />我的订单</div>
 
     <van-popup v-model="showPicker" round position="bottom">
       <van-picker
@@ -18,27 +29,32 @@
       />
     </van-popup>
 
-      
-    <van-calendar v-model="show" :round="false" position="right" />
+
   </div>
 </template>
 
 <script>
 import { citylist } from '@/api/city.js'
 import CityDate from './CityDate'
+import CityPosition from './CityPosition'
 export default {
   components:{
-    CityDate
+    CityDate,  //出发时间
+    CityPosition //舱位
   },
   data() {
     return {
         falg:false, //切换城市控制控制变量
         temp:0,     //tab切换
-        dep:'北京', //默认出发
-        arr:'上海', //默认到达
         showPicker:false, //选择城市
         columns:null,  //城市列表
         show:false, // 控制日期显示
+        model:{
+          dep:'北京', //默认出发
+          arr:'上海', //默认到达
+          depDate:'', //出发时间
+          cabinType:0, //舱位
+        }
     }
   },
   methods:{
@@ -48,14 +64,14 @@ export default {
         }else{
           this.temp = 1
         }
-      
+        this.showPicker = true
     },
     //选择城市确认
     onConfirm(value) {
       if(!this.temp) {
-        this.dep = value.text
+        this.model.dep = value.text
       }else{
-        this.arr = value.text
+        this.model.arr = value.text
       }
       this.showPicker = false
     },
@@ -65,14 +81,15 @@ export default {
     },
     //切换城市
     exchangeCity() {
-      let dep = this.dep
-      let arr = this.arr
-      this.dep = arr
-      this.arr = dep
+      let dep = this.model.dep
+      let arr = this.model.arr
+      this.model.dep = arr
+      this.model.arr = dep
     } 
   },
   watch:{
     falg() {
+      //动画
       if(this.falg) {
         setTimeout(() => {
           this.falg = false
@@ -112,5 +129,24 @@ export default {
     font-size: 6.889vw;
     font-weight: 700;
   }
+  /deep/ .van-button--default{
+    margin: 6.944vw 0;
+    .van-button__text{
+      font-size: 5.5vw;
+      font-weight: 700;
+    }
+  }
+  .city-cart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9E9E9E;
+    font-size: 3.933vw;
+    .comment-o{
+      font-size: 4.944vw;
+      padding: 0.878vw 1vw 0 1.667vw;
+    }
+  }
+  
 }
 </style>
