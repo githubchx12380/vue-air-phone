@@ -13,8 +13,10 @@
     <city-position @cabinPostion="res => model.cabinType = res" />
 
     <van-button 
+        :loading="loading"
         :block="true"
         :round="true" 
+        @click="orderSubmit"
         color="linear-gradient(to right, #05e4db, #00bee1)"
     >搜索</van-button>
 
@@ -49,6 +51,7 @@ export default {
         showPicker:false, //选择城市
         columns:null,  //城市列表
         show:false, // 控制日期显示
+        loading:false, //按钮等待
         model:{
           dep:'北京', //默认出发
           arr:'上海', //默认到达
@@ -85,7 +88,15 @@ export default {
       let arr = this.model.arr
       this.model.dep = arr
       this.model.arr = dep
-    } 
+    },
+    //订单提交
+    orderSubmit() {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.$router.push('/cart')
+      },1500)
+    }
   },
   watch:{
     falg() {
@@ -114,7 +125,7 @@ export default {
 
 <style scoped lang="less">
 .city-select{
-  padding: 6.944vw 5.556vw;
+  padding: 5.944vw 5.556vw 3vw 5.556vw;
    >div:nth-child(1) {
      display: flex;
      justify-content: space-between;

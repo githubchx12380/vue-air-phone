@@ -67,7 +67,7 @@ export default {
 
 <style lang="less">
 .city-date-box{
-  padding: 9.556vw 0;
+  padding: 7.556vw 0;
 }
 .city-date{
   font-size: 5.389vw;

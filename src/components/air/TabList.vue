@@ -37,13 +37,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import '~@/assets/css/common.less';
 .tab-list-box{
     width: 100%;
-    padding: 22.222vw 1.944vw 1.944vw 1.944vw;
+    padding: 15.222vw 1.944vw 0vw 1.944vw;
 }
 .tab-list{
     width: 100%;
-    background-color: white;
+    background-color: @back-color;
      border-radius: 0.833vw;
     .tab-list-item{
         display: flex;
