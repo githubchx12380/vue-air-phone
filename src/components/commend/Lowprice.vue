@@ -1,23 +1,27 @@
 <template>
   <div class="low-price">
-      <div class="low-price-title">
-        <h3 class="col-title-ico">超值低价</h3>
-      </div>
+     
+      <h3 class="col-title-ico">超值低价</h3>
+ 
+      <low-price-tab></low-price-tab>
+      <low-price-tab></low-price-tab>
+      <low-price-tab></low-price-tab>
   </div>
 </template>
 
 <script>
+import LowPriceTab from './LowpriceTab'
 export default {
-
+  components:{
+    LowPriceTab
+  }
 }
 </script>
-
 <style scoped lang="less">
 @import '~@/assets/css/common.less';
 .low-price{
   padding: 3.1vw 1.944vw;
   background-color: @back-color;
-  .low-price-title{
     h3{
       font-weight: 400;
       font-size: 5.756vw;
@@ -37,6 +41,5 @@ export default {
         border-radius: 0.278vw;
         background-color: #02c0e0;
       }
-  }
 }
 </style>
