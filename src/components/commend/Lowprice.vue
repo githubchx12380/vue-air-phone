@@ -4,16 +4,18 @@
       <h3 class="col-title-ico">超值低价</h3>
  
       <low-price-tab></low-price-tab>
-      <low-price-tab></low-price-tab>
-      <low-price-tab></low-price-tab>
+
+      <low-air-data-tab></low-air-data-tab>
   </div>
 </template>
 
 <script>
 import LowPriceTab from './LowpriceTab'
+import LowAirDataTab from './LowAirDataTab'
 export default {
   components:{
-    LowPriceTab
+    LowPriceTab,
+    LowAirDataTab
   }
 }
 </script>
