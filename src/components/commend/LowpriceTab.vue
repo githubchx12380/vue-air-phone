@@ -34,7 +34,9 @@ export default {
     },
     methods:{
       LowPricehandle(id) {
-         this.$store.dispatch('filtervaca/UPDATE_TAB_ID',id)
+         this.$store.dispatch('filtervaca/UPDATE_TAB_ID',id).then(res => {
+           console.log(res);
+         })
       }
     },
     watch:{

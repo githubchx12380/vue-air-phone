@@ -24,12 +24,12 @@ const actions = {
     },
     'UPDATE_TAB_ID'({state,commit},TabUd) {
         commit('vacationId',TabUd)
-        vacationsData(state.depFilter)
+        return vacationsData(state.depFilter)
     }
 }
 
 const getters = {
-    computeds(state) {
+    'COMPUTED_FIRST'(state) {
         vacationsData(state.depFilter)
     }
 }
