@@ -2,7 +2,7 @@
   <div class="home">
      <nav-bar></nav-bar> 
      <tab-list></tab-list>
-     <commend></commend>
+     <menu-line></menu-line>
      <low-price></low-price>
      <div>--------------</div>
      <div>--------------</div>
@@ -26,13 +26,13 @@
 <script>
 import NavBar from '@/components/air/NavBar.vue'
 import TabList from '@/components/air/TabList.vue'
-import commend from '@/components/commend/commend.vue'
-import lowPrice from '@/components/commend/Lowprice.vue'
+import menuLine from '@/components/menu/MenuLine.vue'
+import lowPrice from '@/components/festival/Lowprice.vue'
 export default {
   components:{
     NavBar, //首页顶部Nav,
     TabList, //购票tab栏
-    commend, //推荐
+    menuLine, //菜单
     lowPrice, //低价
   }
 }

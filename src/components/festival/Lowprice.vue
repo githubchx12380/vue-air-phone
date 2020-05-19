@@ -10,7 +10,6 @@
 import LowPriceTab from './LowpriceTab'
 import LowAirDataTab from './LowAirDataTab'
 import { vacation,vacationsData} from '@/api/Lowprice.js'
-import { mapState,mapActions } from 'vuex'
 export default {
   data() {
     return {
