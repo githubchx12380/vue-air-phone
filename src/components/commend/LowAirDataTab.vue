@@ -8,12 +8,6 @@
         <div class="low-item-parent">
              <LowAirItem />
              <LowAirItem />
-             <LowAirItem />
-             <LowAirItem />
-             <LowAirItem />
-             <LowAirItem />
-             <LowAirItem />
-             <LowAirItem />
         </div>
   </div>
 </template>
@@ -23,7 +17,7 @@ import LowAirItem from './LowAirItem'
 export default {
     components:{
         LowAirItem
-    }
+    },
 }
 </script>
 

@@ -7,11 +7,10 @@
         </div>
        <div class="city animate__animated" @click="showPickerclick('arr')" :class="{animate__fadeOutLeft:falg}">{{model.arr}}</div>
     </div>
-
     <city-date @depDateChange="res => model.depDate = res" />
 
     <city-position @cabinPostion="res => model.cabinType = res" />
-
+      
     <van-button 
         :loading="loading"
         :block="true"
@@ -39,6 +38,7 @@
 import { citylist } from '@/api/city.js'
 import CityDate from './CityDate'
 import CityPosition from './CityPosition'
+import {mapGetters} from 'vuex'
 export default {
   components:{
     CityDate,  //出发时间
@@ -54,7 +54,9 @@ export default {
         loading:false, //按钮等待
         model:{
           dep:'北京', //默认出发
+          depAirprotCode:'CAN',
           arr:'上海', //默认到达
+          arrAirprotCode:'SHA',
           depDate:'', //出发时间
           cabinType:0, //舱位
         }
@@ -73,11 +75,13 @@ export default {
     onConfirm(value) {
       if(!this.temp) {
         this.model.dep = value.text
+        this.$store.dispatch('filtervaca/UPDATE_DEP',value.citycode)
       }else{
         this.model.arr = value.text
       }
       this.showPicker = false
     },
+    
     //控制动画
     exchange() {
       this.falg = true
@@ -117,6 +121,8 @@ export default {
           citycode:item.citycode,
         }
       })
+      
+      this.$store.commit('filtervaca/originDep',this.model.depAirprotCode)
       this.columns.push({text:'暂无其他城市机票',disabled: true})
     })
   }

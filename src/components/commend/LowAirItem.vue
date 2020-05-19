@@ -15,7 +15,7 @@
 
 <script>
 export default {
-
+    
 }
 </script>
 
@@ -23,11 +23,10 @@ export default {
 .low-item{
   margin: 1.389vw 0;
   width: 48.5%;
-  height: 20vw;
   background-image: url('~@/assets/img/low-price-img.png');
-  background-size: 100% 20vw;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 2.778vw 4vw 2.778vw 2.222vw;
+  padding: 2.222vw 4.167vw;
   >div:nth-child(1) {
     .city-item{
       font-weight: 700;

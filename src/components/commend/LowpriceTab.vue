@@ -1,23 +1,50 @@
 <template>
   <div class="low-tab">
-      <div class="low-tab-item low-img-1">
-          <p>周末出行</p>
-          <span>5、6月周末</span>
-      </div>
-      <div class="low-tab-item low-img-2">
-           <p>端午出行</p>
-          <span>06.25~06.27</span>
-      </div>
-      <div class="low-tab-item low-img-3">
-           <p>暑假出行</p>
-          <span>08.01~08.31</span>
+      <div class="low-tab-item" 
+      :style="[
+      {background:'url('+baseurl +item.vacation_backimg+')'},styleObj]"
+      @click="LowPricehandle(item.vacation_id)"
+    
+      v-for="(item,index) in vacationTabList"
+      :key="index">
+          <p>{{item.vacation_title}}</p>
+          <span>{{item.vacation_dest}}</span>
       </div>
   </div>
 </template>
 
 <script>
+import request from '@/http/request'
 export default {
-
+    data() {
+      return {
+        styleObj:{
+             backgroundSize: `40px 30px`,
+             backgroundRepeat: 'no-repeat',
+             backgroundPosition: 'right bottom'
+        },
+        vacationId:null
+      }
+    },
+    props:['vacationTabList'],
+    computed:{
+      baseurl() {
+        return request.defaults.baseURL + '/'
+      }
+    },
+    methods:{
+      LowPricehandle(id) {
+         this.$store.dispatch('filtervaca/UPDATE_TAB_ID',id)
+      }
+    },
+    watch:{
+      vacationTabList() {
+        //vuex存储当前假期出行id
+        this.vacationId = this.vacationTabList[0].vacation_id
+        this.$store.commit('filtervaca/vacationId',this.vacationId)
+      }
+    }
+    
 }
 </script>
 
@@ -34,9 +61,6 @@ export default {
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.16);
     background-color: @back-color;
     padding: 8px;
-    background-size: 40px 30px;
-    background-repeat: no-repeat;
-    background-position: right bottom;
     p{
       font-weight: 600;
       font-size: 16px;
@@ -44,15 +68,6 @@ export default {
     span{
       font-size: 9px;
     }
-  }
-  .low-img-1{
-    background-image: url('~@/assets/img/low-price-1.png');
-  }
-  .low-img-2{
-    background-image: url('~@/assets/img/low-price-2.png');
-  }
-  .low-img-3{
-    background-image: url('~@/assets/img/low-price-3.png');
   }
 }
 

@@ -1,10 +1,7 @@
 <template>
   <div class="low-price">
-     
       <h3 class="col-title-ico">超值低价</h3>
- 
-      <low-price-tab></low-price-tab>
-
+      <low-price-tab :vacationTabList="vacationTab"></low-price-tab>
       <low-air-data-tab></low-air-data-tab>
   </div>
 </template>
@@ -12,11 +9,28 @@
 <script>
 import LowPriceTab from './LowpriceTab'
 import LowAirDataTab from './LowAirDataTab'
+import { vacation,vacationsData} from '@/api/Lowprice.js'
+import { mapState,mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      vacationTab:[]
+    }
+  },
   components:{
     LowPriceTab,
     LowAirDataTab
+  },
+  methods:{
+    //根据出发城市,和假期选项获取数据
+   
+  },
+  mounted() {
+      vacation().then(res => {
+         this.vacationTab = res.data.data
+      })
   }
+  
 }
 </script>
 <style scoped lang="less">
