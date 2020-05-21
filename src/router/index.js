@@ -11,7 +11,10 @@ const routes = [
   {
     path:'/flights',
     name:'flights',
-    component:() => import('@/views/air/ticketList.vue')
+    component:() => import('@/views/air/ticketList.vue'),
+    meta:{
+      isNavbar:true
+    }
   }
  
 ]
