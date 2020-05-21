@@ -7,7 +7,7 @@ export const vacation = () => {  //选择出发地获取推荐城市
     })
 }
 
-export const vacationsAir = (FilterAirData) => {
+export const vacationsAir = (FilterAirData) => {   //通过出发地和假期获取机票数据
     return request({
         url:'/vacationsAir',
         params:FilterAirData

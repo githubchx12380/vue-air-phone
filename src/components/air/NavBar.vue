@@ -3,10 +3,10 @@
     <van-sticky  @scroll="scrollTop">
       <van-nav-bar
       :class="{topactiveclass:topActive}"
-      title="机票" 
-      left-text="返回" 
+      :title="title" 
+      :left-text="lefttext" 
       :border="false"
-      :left-arrow="false" 
+      :left-arrow="leftico" 
       >
         <template #right>
           <van-icon name="service-o" size="18" />
@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  props:['title','lefttext','leftico'],
   data() {
     return {
       topActive:false

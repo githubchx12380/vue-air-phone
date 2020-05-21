@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <nav-bar></nav-bar> 
+     <nav-bar title="机票" :leftico="false"></nav-bar> 
      <tab-list></tab-list>
      <menu-line></menu-line>
      <low-price></low-price>
