@@ -6,8 +6,7 @@
       </div>
 
         <div class="low-item-parent">
-             <LowAirItem />
-             <LowAirItem />
+             <LowAirItem :LowAirItem="item" v-for="(item,index) in commendData" :key="index" />
         </div>
   </div>
 </template>
@@ -17,6 +16,11 @@ import LowAirItem from './LowAirItem'
 export default {
     components:{
         LowAirItem
+    },
+    computed:{
+      commendData() {
+        return this.$store.state.filtervaca.successAir.data
+      },
     },
 }
 </script>

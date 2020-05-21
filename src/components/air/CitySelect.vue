@@ -53,7 +53,7 @@ export default {
         show:false, // 控制日期显示
         loading:false, //按钮等待
         model:{
-          dep:'北京', //默认出发
+          dep:'广州', //默认出发
           depAirprotCode:'CAN',
           arr:'上海', //默认到达
           arrAirprotCode:'SHA',
@@ -75,7 +75,9 @@ export default {
     onConfirm(value) {
       if(!this.temp) {
         this.model.dep = value.text
-        this.$store.dispatch('filtervaca/UPDATE_DEP',value.citycode)
+        this.$store.dispatch('filtervaca/UPDATE_DEP',value.citycode).then(res => {
+          
+        })
       }else{
         this.model.arr = value.text
       }
@@ -96,9 +98,17 @@ export default {
     //订单提交
     orderSubmit() {
       this.loading = true
+      if(this.model.dep == this.model.arr) {
+        this.$msg.fail('请重新选择出发城市和到达城市')
+        this.loading = false
+        return
+      }
       setTimeout(() => {
         this.loading = false
-        this.$router.push('/cart')
+        this.$router.push({
+          path:'/flights',
+          query:this.model
+        })
       },1500)
     }
   },
@@ -111,9 +121,11 @@ export default {
           this.exchangeCity()
         },800)
       }
-    }
+    },
+    
   },
   mounted() {
+    this.$store.dispatch('filtervaca/UPDATE_DEP',this.model.depAirprotCode)
     citylist().then(res => {
       this.columns = res.data.data.map(item => {
         return {

@@ -1,13 +1,13 @@
 <template>
   <div class="low-item">
       <div>
-        <p class="city-item">上海 → 哈尔滨</p>
+        <p class="city-LowAirItem">{{LowAirItem.depAirportCode | CityFilter}} → {{LowAirItem.arrAirportCode | CityFilter}}</p>
         <p class="discount">
-          <span>0.7折</span>
+          <span>{{LowAirItem.discountStr}}</span>
         </p>
         <p class="date-price">
-          <span class="date">05-29</span>
-          <span class="price">¥140</span>
+          <span class="date">{{LowAirItem.depDate.substring('5')}}</span>
+          <span class="price">¥{{LowAirItem.price}}</span>
         </p>
       </div>
   </div>
@@ -15,7 +15,31 @@
 
 <script>
 export default {
-    
+    props:['LowAirItem'],
+    filters:{
+      CityFilter(val) {
+        switch (val) {
+          case 'CAN':
+              return '广州'
+            break;
+          case 'BJS':
+              return '北京'
+          case 'SHA':
+              return '上海'
+          case 'HGH':
+              return '杭州'
+          case 'SZX':
+              return '深圳'
+          case 'CKG':
+              return '重庆'
+          case 'HKG':
+              return '香港'
+          default:
+              return '香港'
+            break;
+        }
+      }
+    }
 }
 </script>
 
@@ -28,7 +52,7 @@ export default {
   background-repeat: no-repeat;
   padding: 2.222vw 4.167vw;
   >div:nth-child(1) {
-    .city-item{
+    .city-LowAirItem{
       font-weight: 700;
       font-size: 3.889vw;
     }

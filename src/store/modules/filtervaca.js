@@ -1,8 +1,11 @@
-import {vacationsData} from '@/api/Lowprice'
+import {vacationsAir} from '@/api/Lowprice'
 
 const state = {
     depFilter:{
         
+    },
+    successAir:{
+
     }
 }
 
@@ -13,6 +16,9 @@ const mutations =  {
     },
     'vacationId'(state,vacationId) {
         state.depFilter.vacationId = vacationId  
+    },
+    'Air_Data'(state,Air) {
+        state.successAir = Air
     }
 }
 
@@ -20,24 +26,22 @@ const mutations =  {
 const actions = {
     'UPDATE_DEP'({state,commit},depCode) {
         commit('originDep',depCode)
-        vacationsData(state.depFilter)
+        vacationsAir(state.depFilter).then(res => {
+           commit('Air_Data',res.data)
+        })
     },
     'UPDATE_TAB_ID'({state,commit},TabUd) {
         commit('vacationId',TabUd)
-        return vacationsData(state.depFilter)
+        vacationsAir(state.depFilter).then(res => {
+            commit('Air_Data',res.data)
+        })
     }
 }
 
-const getters = {
-    'COMPUTED_FIRST'(state) {
-        vacationsData(state.depFilter)
-    }
-}
 
 export default {
     namespaced:true,
     state,
     mutations,
     actions,
-    getters
 }

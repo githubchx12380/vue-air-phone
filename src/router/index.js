@@ -5,9 +5,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'flight',
-    component: () => import('@/views/air/Flight.vue')
+    name: 'air',
+    component: () => import('@/views/air/indexFlight.vue'),
   },
+  {
+    path:'/flights',
+    name:'flights',
+    component:() => import('@/views/air/ticketList.vue')
+  }
  
 ]
 
