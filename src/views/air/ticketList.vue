@@ -12,8 +12,7 @@
      </van-sticky>
    
      <van-dropdown-menu :class="{activepad:!flightList.length}">
-         <FilterFlight />
-        
+         <FilterFlight :flightList="originData" @handleAriChange="handleAirFlight" />
     </van-dropdown-menu>
 
      <van-list   
@@ -59,9 +58,16 @@ export default {
             endsize:10,    //结束截取数据下标
             storesize:10,  //暂存一夜数
             storeData:{},   //暂存数据
+            originData:[],
         };
     },
     methods:{
+        handleAirFlight(res) {
+            this.flightList  = res
+            this.storeData.data = res
+            console.log(this.storeData.data);
+            
+        },
         onClickRight() {
 
         },
@@ -69,12 +75,24 @@ export default {
         onLoad() {
            this.bigsize = this.bigsize + this.storesize
            this.endsize = this.endsize + this.storesize
-           this.handleFlight()
+           this.sliceFligth()
+        },
+        sliceFligth() {
+            setTimeout(() => {
+                    this.flightList.push(...this.storeData.data.slice(this.bigsize,this.endsize))
+                    this.loading = false
+                    console.log(this.storeData.data);
+                    
+                    if(this.storeData.data.slice(this.bigsize,this.endsize).length < 10) {
+                        this.finished = true
+                    }
+            },1000)
         },
         //数据筛选
         handleFlight() {
             flightsInfo(this.$route.query).then(res => {
                 this.storeData = res.data
+                this.originData = res.data.data
                 if(res.data.code == 200) {
                     setTimeout(() => {
                         this.loadins = false
@@ -82,23 +100,14 @@ export default {
                             this.empty = true 
                             this.finishedtext = ''
                         }
-                        
-                        
                     },1000)
                 }
-                
-                setTimeout(() => {
-                    this.flightList.push(...this.storeData.data.slice(this.bigsize,this.endsize))
-                    this.loading = false
-                    if(this.storeData.data.slice(this.bigsize,this.endsize).length < 10) {
-                        this.finished = true
-                    }
-                },1000)
             })
         }
     },
     created() {
         this.handleFlight()
+        this.sliceFligth()
     }
 }
 </script>
