@@ -27,8 +27,6 @@
          <van-empty v-if="empty" description="没有找到该路程的机票" />
     </van-list>
     
-    
-     
   </div>
 </template>
 
@@ -63,10 +61,13 @@ export default {
     },
     methods:{
         handleAirFlight(res) {
-            this.flightList  = res
             this.storeData.data = res
-            console.log(this.storeData.data);
-            
+            this.flightList = []
+            this.loadins = true
+            this.finishedtext = ''
+            this.bigsize = 0
+            this.endsize = 10
+            this.sliceFligth()
         },
         onClickRight() {
 
@@ -81,8 +82,8 @@ export default {
             setTimeout(() => {
                     this.flightList.push(...this.storeData.data.slice(this.bigsize,this.endsize))
                     this.loading = false
-                    console.log(this.storeData.data);
-                    
+                    this.loadins = false
+                    this.finishedtext = '没有更多了'
                     if(this.storeData.data.slice(this.bigsize,this.endsize).length < 10) {
                         this.finished = true
                     }

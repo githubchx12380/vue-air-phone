@@ -39,6 +39,7 @@ export default {
             let begm = Number(date[0].split(':')[0]) * 60 + Number(date[0].split(':')[1])
             let finm = Number(date[1].split(':')[0]) * 60 + Number(date[1].split(':')[1])
             return [begm,finm]           
+            
         },
 
         onChange(val) {
