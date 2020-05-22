@@ -68,13 +68,14 @@ export default {
             this.flightList = []
             this.loadins = true
             this.finishedtext = ''
-            this.bigsize = 0
-            this.endsize = 10
-            this.sliceFligth()
+            setTimeout(() => {
+                this.bigsize = 0
+                this.endsize = 10
+                this.sliceFligth()
+            },100)
         },
         onClickRight() {
             this.$refs.flightFilter.initFlight()
-           
         },
         //3.下拉到一定距离更换切割的数据push进去 0 - 9 >  10 - 19 > 20 - 29 ....
         onLoad() {
@@ -85,6 +86,7 @@ export default {
         //2.此时已经获取到ajax数据,使用slice切割暂存数据push到渲染数组里
         sliceFligth() {
             setTimeout(() => {
+                
                     this.flightList.push(...this.storeData.data.slice(this.bigsize,this.endsize))
                     this.loading = false
                     this.loadins = false
@@ -92,7 +94,7 @@ export default {
                     if(this.storeData.data.slice(this.bigsize,this.endsize).length < 10) {
                         this.finished = true 
                     }
-            },1000)
+            },500)
         },
         //1.进入页面先获取数据,赋值给暂存数据和渲染数据,并且隐藏loadins
         handleFlight() {

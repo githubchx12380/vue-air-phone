@@ -47,9 +47,8 @@ export default {
         onChange(val) {
             let newData = this.flightList
 
-
             //价格高低排序
-            if(this.model.value1 == 'low') {
+            if(this.model.value1 == 'low' || this.model.value1 == '') {
                 newData.sort((a,b)=>{
                     return a.price - b.price
                 });
@@ -77,16 +76,22 @@ export default {
                     return this.model.value3 == item.mealDesc
                 })
             }
+            console.log(newData[0].price);
             
             this.$emit('handleAriChange',newData)
         },
 
 
         initFlight() {
-            this.model.value1 = ''
-            this.model.value2 = ''
-            this.model.value3 = ''
-            this.$emit('handleAriChange',this.flightList)
+            if(this.model.value1 || this.model.value2 || this.model.value3) {
+                this.model.value1 = ''
+                this.model.value2 = ''
+                this.model.value3 = ''
+                this.onChange()
+            }else{
+                window.scrollTo(0,0)
+            }
+            
         }
     },
     props:['flightList'],
