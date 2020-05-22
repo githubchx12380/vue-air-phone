@@ -34,6 +34,7 @@ export default {
         }
     },
     methods:{
+        //时间转换为分,来进行对比
         handleData(val) {
             let date = val.split('-')
             let begm = Number(date[0].split(':')[0]) * 60 + Number(date[0].split(':')[1])
@@ -42,6 +43,7 @@ export default {
             
         },
 
+        //过滤数据
         onChange(val) {
             let newData = this.flightList
 
@@ -76,9 +78,15 @@ export default {
                 })
             }
             
-
-
             this.$emit('handleAriChange',newData)
+        },
+
+
+        initFlight() {
+            this.model.value1 = ''
+            this.model.value2 = ''
+            this.model.value3 = ''
+            this.$emit('handleAriChange',this.flightList)
         }
     },
     props:['flightList'],
