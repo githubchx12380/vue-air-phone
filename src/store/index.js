@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import camelcase from 'camelcase'
-import getters from './getters'
+import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex)
 
 const moduleStores = {};
@@ -30,4 +30,9 @@ export default new Vuex.Store({
     modules:{
         ...moduleStores
     },
+    plugins: [
+      createPersistedState({
+        paths: ["cart"]
+      }) // 默认localstorage
+    ]
 })

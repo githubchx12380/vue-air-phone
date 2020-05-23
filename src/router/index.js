@@ -4,9 +4,24 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path:'/',
+    redirect:'/air',
+  },
+  {
+    path: '/air',
     name: 'air',
-    component: () => import('@/views/air/indexFlight.vue'),
+    component: () => import('../App.vue'),
+    children:[
+      {
+        path:'/air',
+        component:() => import('@/views/air/indexFlight')
+      },
+      {
+        path:'cart',
+        name:'cart',
+        component:() => import('@/views/cart/index.vue')
+      }
+    ]
   },
   {
     path:'/flights',
@@ -14,9 +29,16 @@ const routes = [
     component:() => import('@/views/air/ticketList.vue'),
     meta:{
       isNavbar:true
-    }
+    },
+  },
+  {
+    path:'/pay/:id',
+    name:'pay',
+    component:() => import('@/views/air/pay.vue'),
+    meta:{
+      isNavbar:true
+    },
   }
- 
 ]
 
 const router = new VueRouter({

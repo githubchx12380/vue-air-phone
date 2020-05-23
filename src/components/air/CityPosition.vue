@@ -19,7 +19,7 @@ export default {
           { name: '经济舱',cabinType:2},
         ],
         cabinType:0,
-        PositionText:'选择舱位'  
+        PositionText:'舱位不限'  
       }
     },
     methods:{

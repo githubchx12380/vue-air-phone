@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="handlecart">
     <van-row class="ticket-item">
       <van-col class="item-info" span="18">
           <van-row>
@@ -37,6 +37,14 @@ export default {
             }else{
                 return '头等舱'
             }
+        }
+    },
+    methods:{
+        handlecart() {
+            this.$router.push({
+                path:'/pay/' + this.flightitem.air_ticket_id,
+                query:this.$route.query
+            })
         }
     }
 }

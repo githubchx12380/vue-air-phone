@@ -75,11 +75,13 @@ export default {
     onConfirm(value) {
       if(!this.temp) {
         this.model.dep = value.text
+        this.model.depAirprotCode = value.citycode
         this.$store.dispatch('filtervaca/UPDATE_DEP',value.citycode).then(res => {
           
         })
       }else{
         this.model.arr = value.text
+        this.model.arrAirprotCode = value.citycode
       }
       this.showPicker = false
     },
@@ -92,6 +94,10 @@ export default {
     exchangeCity() {
       let dep = this.model.dep
       let arr = this.model.arr
+      let depCode = this.model.depAirprotCode
+      let arrCode = this.model.arrAirprotCode
+      this.model.depAirprotCode = arrCode
+      this.model.arrAirprotCode = depCode
       this.model.dep = arr
       this.model.arr = dep
     },
