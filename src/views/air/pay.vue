@@ -8,7 +8,7 @@
 
     <pay-info2 :airInfo="flightInfo"></pay-info2>
 
-    <pay-info3-person></pay-info3-person>
+    <pay-info3-person :airInfo="flightInfo"></pay-info3-person>
   </div>
 </template>
 

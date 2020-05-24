@@ -5,6 +5,7 @@
         <van-field label="姓名"  v-model="item.name" placeholder="与乘机证件一致" />
         <van-field label="身份证" v-model="item.card" maxlength="18" value="" placeholder="请填写证件号码" />
       </van-cell-group>
+
       <van-cell-group style="margin-top:25px;">
         <van-field label="联系人" left-icon="friends-o" readonly></van-field>
         <van-field label="姓名"  placeholder="接收机票联系人" />
@@ -14,15 +15,23 @@
             </template> 
         </van-field>
       </van-cell-group>
+
       <van-submit-bar :price="3050" button-text="提交订单"  color="#be99ff" @submit="onSubmit" />
+
+      <van-checkbox-group v-model="result" class="check" direction="horizontal">
+        <van-checkbox name="a">承运人对所运货物的责任险</van-checkbox>
+        <van-checkbox name="b">机身险</van-checkbox>
+      </van-checkbox-group>
   </div>
 </template>
 
 <script>
 export default {
+    props:['flightInfo'],
     data() {
         return {
-            person:[{}]
+            person:[{}],
+            result:[]
         }
     },
     methods:{
@@ -37,7 +46,7 @@ export default {
             this.person.splice(index,1)
         },
         onSubmit() {
-            
+
         }
     }
 }
@@ -46,5 +55,10 @@ export default {
 <style scoped lang="less">
 .person-pay{
     margin: 20px 0;
+}
+.check{
+    margin: 4.167vw 0;
+    padding: 3.389vw 2.778vw;
+    background-color: white;
 }
 </style>
