@@ -4,45 +4,53 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
-    redirect:'/air',
+    path: '/',
+    redirect: '/air',
   },
   {
     path: '/air',
     name: 'air',
     component: () => import('../App.vue'),
-    children:[
+    children: [
       {
-        path:'/air',
-        component:() => import('@/views/air/indexFlight')
+        path: '/air',
+        component: () => import('@/views/air/indexFlight')
       },
       {
-        path:'cart',
-        name:'cart',
-        component:() => import('@/views/cart/index.vue')
+        path: 'cart',
+        name: 'cart',
+        component: () => import('@/views/cart/index.vue')
       }
     ]
   },
   {
-    path:'/flights',
-    name:'flights',
-    component:() => import('@/views/air/ticketList.vue'),
-    meta:{
-      isNavbar:true
+    path: '/flights',
+    name: 'flights',
+    component: () => import('@/views/air/ticketList.vue'),
+    meta: {
+      isNavbar: true
     },
   },
   {
-    path:'/pay/:id',
-    name:'pay',
-    component:() => import('@/views/air/pay.vue'),
-    meta:{
-      isNavbar:true
+    path: '/pay/:id',
+    name: 'pay',
+    component: () => import('@/views/air/pay.vue'),
+    meta: {
+      isNavbar: true
+    },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/user/login.vue'),
+    meta: {
+      isNavbar: true
     },
   }
 ]
 
 const router = new VueRouter({
-  mode:'history',
+  mode: 'history',
   routes
 })
 
