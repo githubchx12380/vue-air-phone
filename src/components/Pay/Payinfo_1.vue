@@ -1,7 +1,7 @@
 <template>
   <div>
         <van-cell is-link @click="flightInfoShow = true" v-if="airInfo.depDate" class="air_info">
-      <span>{{airInfo.depDate.replace('2020-','')}}</span>
+      <span v-if="airInfo.arrDate">{{airInfo.depDate.replace('2020-','')}}</span>
       <span>{{weekdate}}</span>
       <span>{{airInfo.depTime}}</span>
       <span>{{airInfo.depAirport + ' → ' + airInfo.arrAirport}}</span>
@@ -9,7 +9,7 @@
 
     <van-popup v-model="flightInfoShow" class="popup">
       <p>
-        <span>{{airInfo.depDate.replace('2020-','')}}</span>
+        <span v-if="airInfo.depDate">{{airInfo.depDate.replace('2020-','')}}</span>
         <span>{{weekdate}}</span>
         <span>{{$route.query.dep + '-' + $route.query.arr}}</span>
       </p>
