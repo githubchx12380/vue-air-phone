@@ -31,9 +31,15 @@ export default {
         z-index: 1;
         left: 50%;
         margin-left:-10.278vw ;
-        background-color: red;
         height: 26.389vw;
         width: 20.833vw;
+        .img{
+            width: 100%;
+            background-color: white;
+            height: 20.832vw;
+            border-radius: 50%;
+            border: 2px solid #93b6e1;
+        }
     }
 }
 /deep/ .van-icon-arrow-left{
