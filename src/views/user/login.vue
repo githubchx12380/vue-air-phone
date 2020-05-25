@@ -24,6 +24,9 @@
 
     <!-- 按钮 -->
     <AuthButton text="登录" @clickbtn="sendVal" />
+
+    <!-- 切换为注册 -->
+    <router-link class="changePage" to="/register">您还没有账号？请立即注册</router-link>
   </div>
 </template>
 
@@ -57,7 +60,13 @@ export default {
         this.$toast.fail("用户名或密码不能为空");
       }
       userLogin(this.username, this.password).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
+        if (res.data.code == 200) {
+          this.$toast.success(res.data.msg);
+          setTimeout(() => {
+            this.$router.push("/");
+          }, 300);
+        }
       });
     }
   }
@@ -82,5 +91,13 @@ export default {
   .title {
     font-size: 5.556vw;
   }
+}
+.changePage {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  margin: 15px 0;
 }
 </style>

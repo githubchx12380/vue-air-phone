@@ -27,7 +27,7 @@ export default {
     border-radius: 6.944vw;
     background-color: #359ce7;
     border: 0vw;
-    margin: 13.889vw 0;
+    margin: 13.889vw 0 0;
   }
 }
 </style>
