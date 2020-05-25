@@ -7,7 +7,7 @@
         <div class="img">
           <img src="../../assets/img/head_img.png" alt />
         </div>
-        <p>登录/注册</p>
+        <p><span @click="$router.push('/login')">登录</span> / <span @click="$router.push('register')">注册</span></p>
       </div>
     </div>
 

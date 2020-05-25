@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="top">
-      <van-icon name="arrow-left" />
+      <van-icon name="arrow-left" @click="$router.back()" />
       <span class="title">登录</span>
     </div>
 
