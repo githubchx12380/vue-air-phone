@@ -1,6 +1,6 @@
 <template>
   <div>
-        <van-cell is-link @click="flightInfoShow = true" v-if="airInfo.depDate" class="air_info">
+    <van-cell is-link @click="flightInfoShow = true" v-if="airInfo.depDate" class="air_info">
       <span v-if="airInfo.arrDate">{{airInfo.depDate.replace('2020-','')}}</span>
       <span>{{weekdate}}</span>
       <span>{{airInfo.depTime}}</span>
