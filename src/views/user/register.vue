@@ -6,9 +6,21 @@
     </div>
 
     <!-- 用户名 -->
-    <AuthInput type="text" placeholder="请输入用户名/手机号" @valchange="setUsername" />
+    <AuthInput
+      type="text"
+      placeholder="请输入用户名/手机号"
+      @valchange="setUsername"
+      rule="^\d{6,18}$"
+      errorMessage="用户名为6到18位"
+    />
     <!-- 密码 -->
-    <AuthInput type="password" placeholder="请输入密码" @valchange="setPassword" />
+    <AuthInput
+      type="password"
+      placeholder="请输入密码"
+      @valchange="setPassword"
+      rule="^\d{6,18}$"
+      errorMessage="密码为6到18位"
+    />
 
     <!-- 按钮 -->
     <AuthButton text="注册" @clickbtn="sendVal" />

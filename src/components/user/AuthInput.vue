@@ -1,20 +1,40 @@
 <template>
   <div class="inputWrapper">
-    <input :type="type" :placeholder="placeholder" v-model="inputValue" @blur="valchange"/>
+    <input
+      :class="{error:!isValid}"
+      :type="type"
+      :placeholder="placeholder"
+      v-model="inputValue"
+      @blur="valchange"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["type", "placeholder"],
+  props: ["type", "placeholder", "rule", "errorMessage"],
   data() {
     return {
-      inputValue: ""
+      inputValue: "",
+      isValid: true
     };
   },
-  methods:{
-    valchange(){
-      this.$emit('valchange',this.inputValue)
+  methods: {
+    valchange() {
+      if (!this.isValid) {
+        this.$toast(this.errorMessage);
+      }
+      this.$emit("valchange", this.inputValue);
+    }
+  },
+  watch: {
+    inputValue() {
+      let reg = new RegExp(this.rule);
+      if (!reg.test(this.inputValue)) {
+        this.isValid = false;
+      } else {
+        this.isValid = true;
+      }
     }
   }
 };
@@ -36,6 +56,9 @@ export default {
     border-bottom: 1px solid #e4e4e4;
     outline: none;
     padding: 0 1.389vw;
+  }
+  .error {
+    border-color: red;
   }
 }
 </style>
