@@ -17,7 +17,7 @@
       </van-cell-group>
 
       <van-submit-bar  :price="model.allprice * 100" button-text="提交订单"  color="#be99ff" @submit="onSubmit" >
-          <van-goods-action-icon icon="cart-o" text="购物车" />
+          <van-goods-action-icon icon="cart-o" text="我的订单" @click="$router.push('/air/cart')"  />
       </van-submit-bar>
 
       <van-checkbox-group v-model="model.result" class="check" direction="horizontal">

@@ -14,7 +14,7 @@
         :key="index"
         :num="item.person.length"
         :price="item.allprice + '.00'"
-        :desc="'出发时间:' + item.depDate"
+        :desc="'出发时间:' + item.depDate + ',' + ' 共' + item.person.length + '人'"
         :title="item.dep +  '→' + item.arr"
         thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
       >
