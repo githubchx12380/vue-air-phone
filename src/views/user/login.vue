@@ -60,8 +60,11 @@ export default {
         this.$toast.fail("用户名或密码不能为空");
       }
       userLogin(this.username, this.password).then(res => {
-        // console.log(res.data);
+        console.log(res.data);
+        const { data } = res.data;
         if (res.data.code == 200) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.id);
           this.$toast.success(res.data.msg);
           setTimeout(() => {
             this.$router.push("/");
