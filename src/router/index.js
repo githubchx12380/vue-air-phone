@@ -47,8 +47,17 @@ const routes = [
   {
     path:'/myorder',
     name:'myorder',
-    component:() => import('@/views/user/Myorder.vue')
+    component:() => import('@/views/user/Myorder.vue'),
+    meta:{
+      isNavbar:true
+    }
   },
+  {
+    path:'/quitorder',
+    name:'quitorder',
+    component:() => import('@/views/user/Quitorder.vue')
+  },
+  
   {
     path: '/login',
     name: 'login',
