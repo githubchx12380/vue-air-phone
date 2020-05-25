@@ -1,0 +1,74 @@
+<template>
+  <div class="box">
+    <div class="top">
+      <van-icon name="arrow-left" />
+      <span class="title">注册</span>
+    </div>
+
+    <!-- 用户名 -->
+    <AuthInput type="text" placeholder="请输入用户名/手机号" @valchange="setUsername" />
+    <!-- 密码 -->
+    <AuthInput type="password" placeholder="请输入密码" @valchange="setPassword" />
+
+    <!-- 按钮 -->
+    <AuthButton text="注册" @clickbtn="sendVal" />
+  </div>
+</template>
+
+<script>
+import AuthInput from "@/components/user/AuthInput";
+import AuthButton from "@/components/user/AuthButton";
+import { userRegister } from "@/api/user.js";
+export default {
+  components: {
+    AuthInput,
+    AuthButton
+  },
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    // 保存用户名
+    setUsername(username) {
+      this.username = username;
+    },
+    // 保存密码
+    setPassword(password) {
+      this.password = password;
+    },
+    // 点击按钮
+    sendVal() {
+      if (!this.username || !this.password) {
+        this.$toast.fail("用户名或密码不能为空");
+      }
+      userRegister(this.username, this.password).then(res => {
+        console.log(res.data);
+      });
+    }
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.top {
+  height: 13.889vw;
+  line-height: 13.889vw;
+  background-color: #359ce7;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  font-size: 5.556vw;
+  margin-bottom: 13.889vw;
+  .van-icon-arrow-left {
+    position: absolute;
+    left: 3.333vw;
+    top: 4.333vw;
+  }
+  .title {
+    font-size: 5.556vw;
+  }
+}
+</style>

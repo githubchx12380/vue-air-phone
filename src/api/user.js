@@ -11,3 +11,13 @@ export const userLogin = (username, password) => {
     })
 }
 
+// 注册功能
+export const userRegister = (username, password) => {
+    return request({
+        url: '/flight_register',
+        method: 'post',
+        data: {
+            username, password
+        }
+    })
+}

@@ -46,6 +46,14 @@ const routes = [
     meta: {
       isNavbar: true
     },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/user/register.vue'),
+    meta: {
+      isNavbar: true
+    },
   }
 ]
 
