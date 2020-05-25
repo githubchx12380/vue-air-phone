@@ -1,12 +1,17 @@
 <template>
   <div class="btnWrapper">
-    <button>{{text}}</button>
+    <button @click="handleBtn">{{text}}</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["text"]
+  props: ["text"],
+  methods: {
+    handleBtn() {
+      this.$emit("clickbtn");
+    }
+  }
 };
 </script>
 

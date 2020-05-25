@@ -9,11 +9,9 @@
     <AuthInput type="text" placeholder="请输入用户名/手机号" @valchange="setUsername" />
     <!-- 密码 -->
     <AuthInput type="password" placeholder="请输入密码" @valchange="setPassword" />
-    <!-- 验证码 -->
-    <AuthInput type="text" placeholder="请输入验证码" />
 
     <!-- 按钮 -->
-    <AuthButton text="登录" />
+    <AuthButton text="登录" @clickbtn="sendVal" />
   </div>
 </template>
 
@@ -36,8 +34,15 @@ export default {
     setUsername(username) {
       this.username = username;
     },
+    // 保存密码
     setPassword(password) {
       this.password = password;
+    },
+    // 点击按钮
+    sendVal() {
+      if (!this.username || !this.password) {
+        this.$toast.fail("用户名或密码不能为空");
+      }
     }
   }
 };
