@@ -2,7 +2,7 @@
   <div class="box">
     <div class="top">
       <van-icon name="arrow-left" />
-      <span class="title">登录</span>
+      <span class="title">注册</span>
     </div>
 
     <!-- 用户名 -->
@@ -23,17 +23,17 @@
     />
 
     <!-- 按钮 -->
-    <AuthButton text="登录" @clickbtn="sendVal" />
+    <AuthButton text="注册" @clickbtn="sendVal" />
 
     <!-- 切换为注册 -->
-    <router-link class="changePage" to="/register">您还没有账号？请立即注册</router-link>
+    <router-link class="changePage" to="/login">您已有账号？点击登录</router-link>
   </div>
 </template>
 
 <script>
 import AuthInput from "@/components/user/AuthInput";
 import AuthButton from "@/components/user/AuthButton";
-import { userLogin } from "@/api/user.js";
+import { userRegister } from "@/api/user.js";
 export default {
   components: {
     AuthInput,
@@ -59,15 +59,12 @@ export default {
       if (!this.username || !this.password) {
         this.$toast.fail("用户名或密码不能为空");
       }
-      userLogin(this.username, this.password).then(res => {
+      userRegister(this.username, this.password).then(res => {
         console.log(res.data);
-        const { data } = res.data;
         if (res.data.code == 200) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.id);
           this.$toast.success(res.data.msg);
           setTimeout(() => {
-            this.$router.push("/");
+            this.$router.replace("/login");
           }, 300);
         }
       });
