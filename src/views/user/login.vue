@@ -18,6 +18,7 @@
 <script>
 import AuthInput from "@/components/user/AuthInput";
 import AuthButton from "@/components/user/AuthButton";
+import { userLogin } from "@/api/user.js";
 export default {
   components: {
     AuthInput,
@@ -43,6 +44,9 @@ export default {
       if (!this.username || !this.password) {
         this.$toast.fail("用户名或密码不能为空");
       }
+      userLogin(this.username, this.password).then(res => {
+        console.log(res.data);
+      });
     }
   }
 };
