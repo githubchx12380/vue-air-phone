@@ -60,9 +60,9 @@ export default {
         this.$toast.fail("用户名或密码不能为空");
       }
       userRegister(this.username, this.password).then(res => {
-        console.log(res.data);
         if (res.data.code == 200) {
           this.$toast.success(res.data.msg);
+          this.$store.dispatch('cart/LOCASTOREAGE_CART')
           setTimeout(() => {
             this.$router.replace("/login");
           }, 300);

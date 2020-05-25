@@ -1,4 +1,4 @@
-import { get_orderinfo } from '@/api/order.js'
+import { get_orderinfo,localStore_Order } from '@/api/order.js'
 
 const state = {
     flight_pay:[]
@@ -31,10 +31,25 @@ const actions = {
         commit('DEL_CART_COMMIT',data)
     },
     //用户注册登录以后判断一下有无本地数据,如果有的话,添加至数据库
-    'LOCASTOREAGE_CART'({commit,state},data) {
-        get_orderinfo(6).then(res => {
-            console.log(res);
+    async 'LOCASTOREAGE_CART'({commit,state},data) {
+        
+        //判断本地存储的数据和数据库的数据,如果下订单的时间相同,那么就过滤掉
+        //不让他传给数据库,如果数据库没有的话,就添加至数据库
+        const res = await get_orderinfo(localStorage.getItem('userId'))
+        let buy_date = res.data.data.map(i => i.buy_date)
+        console.log(buy_date);
+        
+        const result = state.flight_pay.filter(item => {
+            item.user_id = localStorage.getItem('userId')
+            return !buy_date.includes(item.buy_date)
         })
+        console.log(result);
+        
+        if(result.length) {
+            localStore_Order(result).then(res => {
+
+            })
+        }
     }
 }
 

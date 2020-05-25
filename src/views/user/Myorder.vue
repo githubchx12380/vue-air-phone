@@ -24,8 +24,8 @@
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
         >
           <template #tags>
-            <van-tag plain type="danger" v-if="item.result.indexOf('9') != -1">已购货运险</van-tag>
-            <van-tag plain type="danger" v-if="item.result.indexOf('28') != -1">已购机身险</van-tag>
+            <van-tag plain type="danger" v-if="item.baoxian.indexOf('9') != -1">已购货运险</van-tag>
+            <van-tag plain type="danger" v-if="item.baoxian.indexOf('28') != -1">已购机身险</van-tag>
           </template>
           <template #footer>
             <van-button size="mini" type="danger" @click="deleteCartItem(index)">删除</van-button>
@@ -42,24 +42,27 @@ export default {
   data() {
     return {
       loadingShow:true,
-      active:0
+      active:0,
+      orderResult:[],
     }
   },
   components:{
     loading
   },
-  mounted() {
-    setTimeout(() => {
-      this.loadingShow = false
-    },500)
-  },
   watch:{
-    active() {
-      this.loadingShow = true
-      setTimeout(() => {
-         this.loadingShow = false
-      },500)
-    }
+    active:{
+      handler() {
+         this.loadingShow = true
+          setTimeout(() => {
+            this.loadingShow = false
+          },500)
+
+          if(this.active == 0) {
+              
+          }
+      },
+      immediate:true  //进来获取全部订单
+    },
   }
 }
 </script>

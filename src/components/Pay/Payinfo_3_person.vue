@@ -20,7 +20,7 @@
           <van-goods-action-icon icon="cart-o" text="我的订单" @click="$router.push('/air/cart')"  />
       </van-submit-bar>
 
-      <van-checkbox-group v-model="model.result" class="check" direction="horizontal">
+      <van-checkbox-group v-model="model.baoxian" class="check" direction="horizontal">
         <van-checkbox name="9">货物险 / 单张9元</van-checkbox>
         <van-checkbox name="28">机身险 / 单张28元</van-checkbox>
       </van-checkbox-group>
@@ -37,7 +37,7 @@ export default {
             model:{
                 allprice:null,
                 person:[{}],
-                result:[]
+                baoxian:[]
             }
         }
     },
@@ -66,7 +66,7 @@ export default {
     computed:{
         handleAllprice() {
              let price = this.model.person.length * this.airInfo.price
-            this.model.result.forEach(item => {
+            this.model.baoxian.forEach(item => {
                 if(!item) {
                     item = 0
                 }

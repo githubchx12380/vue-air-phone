@@ -65,17 +65,14 @@ export default {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.id);
           this.$toast.success(res.data.msg);
-          
+          this.$store.dispatch('cart/LOCASTOREAGE_CART')
           setTimeout(() => {
-            this.$router.push("/personalcenter");
+            this.$router.replace("/personalcenter");
           }, 300);
         }
       });
     }
   },
-  mounted() {
-    this.$store.dispatch('cart/LOCASTOREAGE_CART')
-  }
 };
 </script>
 
