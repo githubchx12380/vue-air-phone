@@ -5,7 +5,7 @@ const request = axios.create({
     baseURL: 'http://localhost:1337/api'
 })
 
-export default request
+
 
 // 响应拦截器
 request.interceptors.response.use(res => {
@@ -16,3 +16,5 @@ request.interceptors.response.use(res => {
     }
     return res
 })
+
+export default request

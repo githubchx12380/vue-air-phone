@@ -77,7 +77,7 @@ export default {
 .top {
   height: 13.889vw;
   line-height: 13.889vw;
-  background-color: #359ce7;
+  background-color: #2c6fc6;
   color: #ffffff;
   text-align: center;
   position: relative;
@@ -95,9 +95,9 @@ export default {
 .changePage {
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 3.889vw;
   color: #888;
   cursor: pointer;
-  margin: 15px 0;
+  margin: 4.167vw 0;
 }
 </style>

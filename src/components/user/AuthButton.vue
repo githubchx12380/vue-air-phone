@@ -20,12 +20,12 @@ export default {
   display: flex;
   justify-content: center;
   button {
-    width: 300px;
-    height: 45px;
+    width: 83.333vw;
+    height: 12.5vw;
     font-size: 5vw;
     color: #fff;
     border-radius: 6.944vw;
-    background-color: #359ce7;
+    background-color: #2b68c1;
     border: 0vw;
     margin: 13.889vw 0 0;
   }
