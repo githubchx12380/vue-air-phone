@@ -1,38 +1,40 @@
 <template>
   <div class="myprofile-container">
-       <nav-bar :leftico="true"></nav-bar>
+    <nav-bar :leftico="true"></nav-bar>
     <div class="myprofile">
       <img class="back-img" src="@/assets/img/myprofile-back.jpg" alt />
       <div class="head_img">
         <div class="img">
           <img src="../../assets/img/head_img.png" alt />
         </div>
-        <p><span @click="$router.push('/login')">登录</span> / <span @click="$router.push('register')">注册</span></p>
+        <p>
+          <span @click="$router.push('/login')">登录</span> /
+          <span @click="$router.push('register')">注册</span>
+        </p>
       </div>
     </div>
 
-    <myorder />
-
+    <MyBanner />
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/air/NavBar.vue";
-import Myorder from "@/components/user/Myorder.vue";
-import loading from '@/components/common/loading.vue'
+import MyBanner from "@/components/user/MyBanner.vue";
+import loading from "@/components/common/loading.vue";
 export default {
   components: {
     NavBar,
-    Myorder,
+    MyBanner,
     loading
   }
 };
 </script>
 
 <style scoped lang="less">
-.myprofile-container{
-    background-color: #ebeced;
-    padding-bottom: 41.667vw;
+.myprofile-container {
+  background-color: #ebeced;
+  padding-bottom: 41.667vw;
 }
 .myprofile {
   position: relative;

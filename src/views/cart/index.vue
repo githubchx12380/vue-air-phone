@@ -23,7 +23,7 @@
           <van-tag plain type="danger" v-if="item.result.indexOf('28') != -1">已购机身险</van-tag>
         </template>
         <template #footer>
-          <van-button size="mini" type="danger">删除</van-button>
+          <van-button size="mini" type="danger" @click="deleteCartItem(index)">删除</van-button>
           <van-button size="mini" type="primary">付款</van-button>
         </template>
       </van-card>
@@ -43,6 +43,12 @@ export default {
   },
   components:{
     loading
+  },
+  methods:{
+    //删除购物车商品
+    deleteCartItem(index) {
+      this.$store.dispatch('cart/DEL_CART',index)
+    }
   },
   mounted() {
     setTimeout(() => {

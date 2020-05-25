@@ -56,7 +56,7 @@ export default {
                 this.$msg.fail('已为您添加至我的订单,请登录后结算')
                 this.model.air_ticket_id = this.airInfo.air_ticket_id
                 this.model = {...this.model,...this.$route.query}
-                this.$store.commit('cart/ADD_CART',{...this.model})
+                this.$store.dispatch('cart/ADD_CART',{...this.model})
                 this.$router.push('/air/cart')
             }
         }

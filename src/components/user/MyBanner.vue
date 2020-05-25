@@ -21,28 +21,28 @@
           </van-row>
       </div>
       <div class="order-item">
-        <myorder-item icos="balance-list-o" backcolor="#4fc3f7" title="我的订单" />
+        <my-banner-item icos="balance-list-o" @click.native="$router.push('/myorder')" backcolor="#4fc3f7" title="我的订单" />
 
-        <myorder-item icos="cash-back-record" backcolor="#ffa21f" title="我的退款" />
+        <my-banner-item icos="cash-back-record" @click.native="$router.push('/quitorder')" backcolor="#ffa21f" title="我的退款" />
 
-        <myorder-item icos="records" backcolor="#ffa21f" title="我的发票" />
+        <my-banner-item icos="records" backcolor="#ffa21f" title="我的发票" />
         
-        <myorder-item icos="debit-pay" backcolor="#ffa21f" title="我的攻略" />
+        <my-banner-item icos="debit-pay" backcolor="#ffa21f" title="我的攻略" />
       </div>
 
       <div class="fank">
-        <myorder-item icos="chat-o" backcolor="#90a4ae" title="意见反馈" />
+        <my-banner-item icos="chat-o" backcolor="#90a4ae" title="意见反馈" />
 
-        <myorder-item icos="info-o" backcolor="#90a4ae" title="关于" />
+        <my-banner-item icos="info-o" backcolor="#90a4ae" title="关于" />
       </div>
   </div>
 </template>
 
 <script>
-import MyorderItem from './MyorderItem'
+import MyBannerItem from './MyBannerItem'
 export default {
     components:{
-        MyorderItem
+        MyBannerItem
     }
 }
 </script>

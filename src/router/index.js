@@ -40,13 +40,19 @@ const routes = [
     },
   },
   {
-    path:'/myprofile',
-    component:() => import('@/views/user/myprofile.vue')
+    path:'/personalcenter',
+    name:'personalcenter',
+    component:() => import('@/views/user/Personalcenter.vue'),
+  },
+  {
+    path:'/myorder',
+    name:'myorder',
+    component:() => import('@/views/user/Myorder.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/user/login.vue'),
+    component: () => import('@/views/user/Login.vue'),
     meta: {
       isNavbar: true
     },
@@ -54,7 +60,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/views/user/register.vue'),
+    component: () => import('@/views/user/Register.vue'),
     meta: {
       isNavbar: true
     },
