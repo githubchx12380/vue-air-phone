@@ -6,6 +6,16 @@ const request = axios.create({
 })
 
 
+request.interceptors.request.use(function (config) {
+    if(localStorage.getItem('token')&&localStorage.getItem('userId')) {
+        config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
+    }
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+ 
 
 // 响应拦截器
 request.interceptors.response.use(res => {

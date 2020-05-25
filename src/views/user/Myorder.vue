@@ -14,9 +14,25 @@
       </van-tabs>
       <loading v-if="loadingShow" />
       <div v-if="!loadingShow">
-          
+          <van-card
+          v-for="(item,index) in $store.state.cart.flight_pay"
+          :key="index"
+          :num="item.person.length"
+          :price="item.allprice + '.00'"
+          :desc="'出发时间:' + item.depDate + ',' + ' 共' + item.person.length + '人'"
+          :title="item.dep +  '→' + item.arr"
+          thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+        >
+          <template #tags>
+            <van-tag plain type="danger" v-if="item.result.indexOf('9') != -1">已购货运险</van-tag>
+            <van-tag plain type="danger" v-if="item.result.indexOf('28') != -1">已购机身险</van-tag>
+          </template>
+          <template #footer>
+            <van-button size="mini" type="danger" @click="deleteCartItem(index)">删除</van-button>
+            <van-button size="mini" type="primary">付款</van-button>
+          </template>
+        </van-card>
       </div>
-      
   </div>
 </template>
 

@@ -8,7 +8,7 @@
 
       <van-cell-group style="margin-top:6.944vw;">
         <van-field label="联系人" left-icon="friends-o" readonly></van-field>
-        <van-field label="姓名" v-model="model.getFlight"  placeholder="接收机票联系人" />
+        <van-field label="姓名" v-model="model.getname"  placeholder="接收机票联系人" />
         <van-field label="手机号" v-model="model.getPhone" placeholder="接收机票手机" >
             <template #button>
                 <van-button size="small" type="primary">发送验证码</van-button>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     props:['airInfo'],
     data() {
@@ -56,6 +57,7 @@ export default {
                 this.$msg.fail('已为您添加至我的订单,请登录后结算')
                 this.model.air_ticket_id = this.airInfo.air_ticket_id
                 this.model = {...this.model,...this.$route.query}
+                this.model.buy_date = moment().format('YYYY-MM-DD HH:MM:SS')
                 this.$store.dispatch('cart/ADD_CART',{...this.model})
                 this.$router.push('/air/cart')
             }

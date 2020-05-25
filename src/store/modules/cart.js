@@ -1,3 +1,5 @@
+import { get_orderinfo } from '@/api/order.js'
+
 const state = {
     flight_pay:[]
 }
@@ -27,6 +29,12 @@ const actions = {
     //删除购物车商品
     'DEL_CART'({commit,state},data) {
         commit('DEL_CART_COMMIT',data)
+    },
+    //用户注册登录以后判断一下有无本地数据,如果有的话,添加至数据库
+    'LOCASTOREAGE_CART'({commit,state},data) {
+        get_orderinfo(6).then(res => {
+            console.log(res);
+        })
     }
 }
 
