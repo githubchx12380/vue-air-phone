@@ -2,7 +2,7 @@
   <div class="home">
     <van-sticky  @scroll="scrollTop">
       <van-nav-bar
-      :class="{topactiveclass:topActive}"
+      :class="[{topactiveclass:topActive},{topactiveclass1:myprofile}]"
       @click-left="$router.back()"
       :title="title" 
       :left-text="lefttext" 
@@ -22,16 +22,23 @@ export default {
   props:['title','lefttext','leftico'],
   data() {
     return {
-      topActive:false
+      topActive:false,
+      myprofile:false
     }
   },
   methods:{
     scrollTop(top) {
-      if(top.scrollTop > 80) {
+      if(top.scrollTop > 80 && this.$route.path.indexOf('air') != -1) {
         this.topActive = true
       }else{
         this.topActive = false
       }
+      if(top.scrollTop > 80 && this.$route.path.indexOf('myprofile') != -1) {
+        this.myprofile = true
+      }else{
+        this.myprofile = false
+      }
+     
     }
   }
 }
@@ -58,5 +65,9 @@ export default {
 /deep/ .topactiveclass{
     transition: all 0.8s ease 0s;
     background-color: rgb(27, 169, 186);
+}
+/deep/ .topactiveclass1 {
+    transition: all 0.8s ease 0s;
+    background-color: #2b73c7;
 }
 </style>
