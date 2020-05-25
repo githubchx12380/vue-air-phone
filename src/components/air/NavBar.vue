@@ -3,6 +3,7 @@
     <van-sticky  @scroll="scrollTop">
       <van-nav-bar
       :class="{topactiveclass:topActive}"
+      @click-left="$router.back()"
       :title="title" 
       :left-text="lefttext" 
       :border="false"
