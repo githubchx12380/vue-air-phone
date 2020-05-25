@@ -6,9 +6,9 @@
     </div>
 
     <!-- 用户名 -->
-    <AuthInput type="text" placeholder="请输入用户名/手机号" />
+    <AuthInput type="text" placeholder="请输入用户名/手机号" @valchange="setUsername" />
     <!-- 密码 -->
-    <AuthInput type="password" placeholder="请输入密码" />
+    <AuthInput type="password" placeholder="请输入密码" @valchange="setPassword" />
     <!-- 验证码 -->
     <AuthInput type="text" placeholder="请输入验证码" />
 
@@ -24,6 +24,21 @@ export default {
   components: {
     AuthInput,
     AuthButton
+  },
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    // 保存用户名
+    setUsername(username) {
+      this.username = username;
+    },
+    setPassword(password) {
+      this.password = password;
+    }
   }
 };
 </script>

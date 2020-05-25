@@ -1,6 +1,6 @@
 <template>
   <div class="inputWrapper">
-    <input :type="type" :placeholder="placeholder" v-model="inputValue" />
+    <input :type="type" :placeholder="placeholder" v-model="inputValue" @blur="valchange"/>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
     return {
       inputValue: ""
     };
+  },
+  methods:{
+    valchange(){
+      this.$emit('valchange',this.inputValue)
+    }
   }
 };
 </script>
