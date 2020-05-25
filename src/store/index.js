@@ -31,8 +31,6 @@ export default new Vuex.Store({
         ...moduleStores
     },
     plugins: [
-      createPersistedState({
-        paths: ["cart"]
-      }) // 默认localstorage
+      createPersistedState() // 默认localstorage
     ]
 })
