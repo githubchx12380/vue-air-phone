@@ -10,7 +10,7 @@
     <loading v-if="loadingShow" />
     <div  v-if="!loadingShow">
       <van-card
-        v-for="(item,index) in $store.state.cart.flight_pay"
+        v-for="(item,index) in orderCate"
         :key="index"
         :num="item.person.length"
         :price="item.allprice + '.00'"
@@ -35,14 +35,21 @@
 
 <script>
 import loading from '@/components/common/loading.vue'
+import { get_orderinfo } from '@/api/order.js'
 export default {
   data() {
     return {
-      loadingShow:true
+      loadingShow:true,
+      orderResult:[]
     }
   },
   components:{
     loading
+  },
+  computed:{
+    orderCate() {
+      return localStorage.getItem('token') ? this.orderResult : this.$store.state.cart.flight_pay
+    }
   },
   methods:{
     //删除购物车商品
@@ -51,9 +58,17 @@ export default {
     }
   },
   mounted() {
+    //进入页面loading动画
     setTimeout(() => {
       this.loadingShow = false
     },500)
+
+    //如果登录状态,就取数据库数据,否则取本地存储数据
+    if(localStorage.getItem('token')) {
+      get_orderinfo(localStorage.getItem('userId')).then(res => {
+            this.orderResult = [...res.data.data]
+      })
+    }
   }
 };
 </script>

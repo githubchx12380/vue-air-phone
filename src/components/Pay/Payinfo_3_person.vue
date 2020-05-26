@@ -66,7 +66,7 @@ export default {
     },
     computed:{
         handleAllprice() {
-             let price = this.model.person.length * this.airInfo.price
+            let price = this.model.person.length * this.airInfo.price
             this.model.baoxian.forEach(item => {
                 if(!item) {
                     item = 0
