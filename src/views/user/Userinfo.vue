@@ -6,32 +6,45 @@
         left-arrow
         @click-left="$router.back()"
       />
-      
-      <div style="margin:2.778vw 0;">
-        <userinfo-banner left="头像">
-          <img v-if="userinfo.head_img" :src="userinfo.head_img" slot="right" alt="">
-          <img src="@/assets/img/user_img.png" v-else slot="right" alt="">
-        </userinfo-banner>
-        <userinfo-banner left="昵称"></userinfo-banner>
-        <userinfo-banner left="手机"></userinfo-banner>
-        <userinfo-banner left="邮箱"></userinfo-banner>
+      <loading v-if="loadingShow" />
+      <div v-if="!loadingShow">
+          <div style="margin:2.778vw 0;">
+          <userinfo-banner left="头像">
+            <img v-if="userinfo.head_img" :src="userinfo.head_img" slot="right" alt="">
+            <img src="@/assets/img/user_img.png" v-else slot="right" alt="">
+          </userinfo-banner>
+            <userinfo-banner left="昵称" :info="userinfo.head_img"></userinfo-banner>
+            <userinfo-banner left="账号" :info="userinfo.username" :icos="true"></userinfo-banner>
+            <userinfo-banner left="邮箱" :info="userinfo.email"></userinfo-banner>
+          </div>
+          <div style="margin:2.778vw 0;">
+            <userinfo-banner left="性别" :info="userinfo ? '男' : '女'"></userinfo-banner>
+            <userinfo-banner left="出生日期" :info="userinfo.birth_date"></userinfo-banner>
+            <userinfo-banner left="信用分" :info="userinfo.xinyong"></userinfo-banner>
+          </div>
       </div>
   </div>
 </template>
 
 <script>
 import UserinfoBanner from '@/components/user/UserinfoBanner'
+import loading from '@/components/common/loading.vue'
 import { get_webuserinfo } from '@/api/user.js'
 export default {
   data() {
     return {
-      userinfo:{}
+      userinfo:{},
+      loadingShow:true,
     }
   },
   components:{
-    UserinfoBanner
+    UserinfoBanner,
+    loading
   },
   mounted() {
+    setTimeout(() => {
+      this.loadingShow = false
+    },500)
     get_webuserinfo(localStorage.getItem('userId')).then(res => {
       this.userinfo = res.data.data[0]
     })

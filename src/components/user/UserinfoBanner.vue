@@ -1,23 +1,24 @@
 <template>
-  <div class="userinfo-banner">
+  <div class="userinfo-banner" :class="{active:icos}">
       <div>{{left}}</div>
       <div>
           <span>
               {{info}}
               <slot name="right" />
           </span>
-          <van-icon name="arrow" />
+          <van-icon v-show="!icos" name="arrow" />
       </div>
   </div>
 </template>
 
 <script>
 export default {
-    props:['left','info']
+    props:['left','info','icos']
 }
 </script>
 
 <style scoped lang="less">
+
 .userinfo-banner{
     background-color: white;
     padding: 3.333vw 3.333vw;
@@ -47,5 +48,8 @@ export default {
             color: #999;
         }
     }
+}
+.active{
+    padding-right: 20px;
 }
 </style>

@@ -58,7 +58,8 @@ const routes = [
     name:'userinfo',
     component:() => import('@/views/user/Userinfo.vue'),
     meta:{
-      istoken:true
+      istoken:true,
+      isNavbar:true
     }
   },
   {
