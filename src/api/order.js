@@ -21,3 +21,11 @@ export const localStore_Order = (arr) => {
 }
 
 
+//buy_state 传 1 代表查询待支付订单,传 2 查询已支付订单  带上userId
+export const buy_stateOrder = (obj) => {
+    return request({
+        url:'/v2/buy_stateOrder',
+        params:obj
+    })
+}
+

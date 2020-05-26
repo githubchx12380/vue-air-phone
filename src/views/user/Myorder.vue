@@ -17,9 +17,9 @@
           <van-card
           v-for="(item,index) in orderResult"
           :key="index"
-          :num="item.person.length"
+          :num="JSON.parse(item.person).length"
           :price="item.allprice + '.00'"
-          :desc="'出发时间:' + item.depDate + ',' + ' 共' + item.person.length + '人'"
+          :desc="'出发时间:' + item.depDate + ',' + ' 共' + JSON.parse(item.person).length + '人'"
           :title="item.dep +  '→' + item.arr"
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
         >
@@ -38,7 +38,7 @@
 
 <script>
 import loading from '@/components/common/loading.vue'
-import { get_orderinfo } from '@/api/order.js'
+import { get_orderinfo,buy_stateOrder } from '@/api/order.js'
 export default {
   data() {
     return {
@@ -57,9 +57,18 @@ export default {
           setTimeout(() => {
             this.loadingShow = false
           },500)
-
+          //查询所有订单
           if(this.active == 0) {
             get_orderinfo(localStorage.getItem('userId')).then(res => {
+              this.orderResult = [...res.data.data]
+            })
+          }
+          //buy_state 传 1 代表查询待支付订单,传 2 查询已支付订单  带上userId
+          if(this.active == 1 || this.active == 2) {
+            buy_stateOrder({
+              buy_state:this.active,
+              id:localStorage.getItem('userId')
+            }).then(res => {
               this.orderResult = [...res.data.data]
             })
           }
