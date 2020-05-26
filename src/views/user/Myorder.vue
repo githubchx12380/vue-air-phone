@@ -15,7 +15,7 @@
       <loading v-if="loadingShow" />
       <div v-if="!loadingShow">
           <van-card
-          v-for="(item,index) in $store.state.cart.flight_pay"
+          v-for="(item,index) in orderResult"
           :key="index"
           :num="item.person.length"
           :price="item.allprice + '.00'"
@@ -38,6 +38,7 @@
 
 <script>
 import loading from '@/components/common/loading.vue'
+import { get_orderinfo } from '@/api/order.js'
 export default {
   data() {
     return {
@@ -58,8 +59,11 @@ export default {
           },500)
 
           if(this.active == 0) {
-              
+            get_orderinfo(localStorage.getItem('userId')).then(res => {
+              this.orderResult = [...res.data.data]
+            })
           }
+
       },
       immediate:true  //进来获取全部订单
     },

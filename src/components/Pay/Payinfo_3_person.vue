@@ -53,14 +53,15 @@ export default {
             this.model.person.splice(index,1)
         },
         onSubmit() {
-            if(!localStorage.getItem('token')){
                 this.$msg.fail('已为您添加至我的订单,请登录后结算')
                 this.model.air_ticket_id = this.airInfo.air_ticket_id
                 this.model = {...this.model,...this.$route.query}
                 this.model.buy_date = moment().format('YYYY-MM-DD HH:MM:SS')
                 this.$store.dispatch('cart/ADD_CART',{...this.model})
                 this.$router.push('/air/cart')
-            }
+                if(localStorage.getItem('token')) {
+                    this.$store.dispatch('cart/LOCASTOREAGE_CART')
+                }
         }
     },
     computed:{
