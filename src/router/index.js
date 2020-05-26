@@ -49,7 +49,8 @@ const routes = [
     name:'myorder',
     component:() => import('@/views/user/Myorder.vue'),
     meta:{
-      isNavbar:true
+      isNavbar:true,
+      istoken:true
     }
   },
   {
@@ -79,6 +80,14 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes
+})
+
+router.beforeEach((to,form,next) => {
+  if((!localStorage.getItem('token') || !localStorage.getItem('userId')) && to.meta.istoken){
+    Vue.prototype.$msg.fail('请先登录')
+    return
+  }
+  next()
 })
 
 export default router

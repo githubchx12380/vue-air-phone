@@ -33,7 +33,7 @@ export default {
       }else{
         this.topActive = false
       }
-      if(top.scrollTop > 80 && this.$route.path.indexOf('myprofile') != -1) {
+      if(top.scrollTop > 80 && this.$route.path.indexOf('personalcenter') != -1) {
         this.myprofile = true
       }else{
         this.myprofile = false

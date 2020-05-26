@@ -29,3 +29,12 @@ export const buy_stateOrder = (obj) => {
     })
 }
 
+
+//删除订单  传入订单时间和userid
+export const del_order = (obj) => {
+    return request({
+        url:'/v2/del_order',
+        params:obj
+    })
+}
+

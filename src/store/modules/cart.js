@@ -36,14 +36,13 @@ const actions = {
         //判断本地存储的数据和数据库的数据,如果下订单的时间相同,那么就过滤掉
         //不让他传给数据库,如果数据库没有的话,就添加至数据库
         const res = await get_orderinfo(localStorage.getItem('userId'))
-        let buy_date = res.data.data.map(i => i.buy_date)
-        console.log(buy_date);
         
+        let buy_date = JSON.parse(res.data.data).map(i => i.buy_date)
+       
         const result = state.flight_pay.filter(item => {
             item.user_id = localStorage.getItem('userId')
             return !buy_date.includes(item.buy_date)
         })
-        console.log(result);
         
         if(result.length) {
             localStore_Order(result).then(res => {
