@@ -37,7 +37,7 @@ const actions = {
         //不让他传给数据库,如果数据库没有的话,就添加至数据库
         const res = await get_orderinfo(localStorage.getItem('userId'))
         
-        let buy_date = JSON.parse(res.data.data).map(i => i.buy_date)
+        let buy_date = res.data.data.map(i => i.buy_date)
        
         const result = state.flight_pay.filter(item => {
             item.user_id = localStorage.getItem('userId')

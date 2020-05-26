@@ -60,7 +60,7 @@ export default {
           //查询所有订单
           if(this.active == 0) {
             get_orderinfo(localStorage.getItem('userId')).then(res => {
-              this.orderResult = [...JSON.parse(res.data.data)]
+              this.orderResult = [...res.data.data]
             })
           }
           //buy_state 传 1 代表查询待支付订单,传 2 查询已支付订单  带上userId
@@ -69,8 +69,8 @@ export default {
               buy_state:this.active,
               id:localStorage.getItem('userId')
             }).then(res => {
-           
-              this.orderResult = [...JSON.parse(res.data.data)]
+              
+              this.orderResult = [...res.data.data]
               
             })
           }

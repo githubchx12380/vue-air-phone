@@ -56,7 +56,10 @@ const routes = [
   {
     path:'/quitorder',
     name:'quitorder',
-    component:() => import('@/views/user/Quitorder.vue')
+    component:() => import('@/views/user/Quitorder.vue'),
+    meta:{
+      istoken:true
+    }
   },
   
   {

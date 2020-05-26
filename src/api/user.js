@@ -21,3 +21,15 @@ export const userRegister = (username, password) => {
         }
     })
 }
+
+
+
+//查询个人信息
+export const get_webuserinfo = (id) => {
+    return request({
+        url:'/v1/get_webuserinfo',
+        params:{
+            id
+        }
+    })
+}

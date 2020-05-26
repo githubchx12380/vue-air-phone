@@ -7,7 +7,8 @@
           </h2>
           <van-row class="money-info">
               <van-col class="money-info-item" span="8">
-                  <span class="numbers">0.00</span>
+                  <span class="numbers" v-if="userinfo">{{userinfo.money + '.00'}}</span>
+                  <span class="numbers" v-else>0.00</span>
                   <span class="text">账户余额</span>
               </van-col>
               <van-col class="money-info-item" span="8">
@@ -41,6 +42,7 @@
 <script>
 import MyBannerItem from './MyBannerItem'
 export default {
+    props:['userinfo'],
     components:{
         MyBannerItem
     }

@@ -1,20 +1,35 @@
 <template>
   <div class="myprofile-container">
     <nav-bar :leftico="true"></nav-bar>
-    <div class="myprofile">
+    <div class="myprofile" v-if="!userinfo">
       <img class="back-img" src="@/assets/img/myprofile-back.jpg" alt />
       <div class="head_img">
         <div class="img">
           <img src="../../assets/img/head_img.png" alt />
         </div>
         <p>
-          <span @click="$router.push('/login')">登录</span> /
+          <span @click="$router.push('/login')">登录</span>
           <span @click="$router.push('register')">注册</span>
         </p>
       </div>
     </div>
 
-    <MyBanner />
+    <div class="myprofile" v-if="userinfo">
+      <img class="back-img" src="@/assets/img/myprofile-back.jpg" alt />
+      <div class="head_img">
+        <div class="img">
+          <img v-if="userinfo.head_img" :src="userinfo.head_img" alt="">
+          <img v-else src="@/assets/img/user_img.png" alt />
+        </div>
+        <p >
+          <span @click="$router.push('/userinfo')">
+            {{userinfo.name ? userinfo.name : '还没有名字'}}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <MyBanner :userinfo="userinfo" />
   </div>
 </template>
 
@@ -22,11 +37,24 @@
 import NavBar from "@/components/air/NavBar.vue";
 import MyBanner from "@/components/user/MyBanner.vue";
 import loading from "@/components/common/loading.vue";
+import { get_webuserinfo } from '@/api/user.js'
 export default {
+  data() {
+    return {
+      userinfo:null  
+    }
+  },
   components: {
     NavBar,
     MyBanner,
     loading
+  },
+  mounted() {
+    if(localStorage.getItem('token')) {
+      get_webuserinfo(localStorage.getItem('userId')).then(res => {
+        this.userinfo = res.data.data[0]
+      })
+    }
   }
 };
 </script>

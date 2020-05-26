@@ -95,7 +95,8 @@ export default {
             buy_state:1,
             id:localStorage.getItem('userId')
           }).then(res => {
-            this.orderResult = [...JSON.parse(res.data.data)]
+            this.orderResult = [...res.data.data]
+            this.$route.meta.count = this.orderResult.length
           })
          },500)
         }
