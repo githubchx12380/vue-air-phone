@@ -54,6 +54,14 @@ const routes = [
     }
   },
   {
+    path:'/userinfo',
+    name:'userinfo',
+    component:() => import('@/views/user/Userinfo.vue'),
+    meta:{
+      istoken:true
+    }
+  },
+  {
     path:'/quitorder',
     name:'quitorder',
     component:() => import('@/views/user/Quitorder.vue'),
