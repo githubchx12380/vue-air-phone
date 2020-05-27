@@ -21,18 +21,33 @@
               </userinfo-banner>
             </div>
             <!-- 修改昵称 -->
-            <userinfo-banner left="昵称" :info="userinfo.name" @UpdateInfoHandle="UpdateName" />
+            <userinfo-banner left="昵称" :info="userinfo.name" @UpdateInfoHandle="nameshow = true" />
             
             <userinfo-banner left="账号" :info="userinfo.username" :icos="true" />
             <userinfo-banner left="邮箱" :info="userinfo.email" :icos="true"></userinfo-banner>
           </div>
 
           <div style="margin:2.778vw 0;">
-            <userinfo-banner left="性别" :info="userinfo ? '男' : '女'" @UpdateInfoHandle="UpdateGender" />
+            <userinfo-banner left="性别" :info="userinfo.gender ? '男' : '女'" @UpdateInfoHandle="gendershow = true" />
             <userinfo-banner left="出生日期" :info="userinfo.birth_date" @UpdateInfoHandle="UpdateDate" />
             <userinfo-banner left="信用分" :info="userinfo.xinyong" :icos="true" />
           </div>
       </div>
+      <!-- 昵称 -->
+          <van-dialog v-model="nameshow" 
+                title="昵称" 
+                show-cancel-button 
+                @confirm="HandleName"
+                @cancel="content = ''"
+                >
+              <van-field v-model="content"  autofocus />
+          </van-dialog>
+
+
+         
+        
+
+          <van-action-sheet v-model="gendershow" cancel-text="取消" :actions="actions" @select="HandleGender" />
   </div>
 </template>
 
@@ -46,6 +61,14 @@ export default {
     return {
       userinfo:{},
       loadingShow:true,
+       show:false,
+            nameshow:false,
+            gendershow:false,
+            content:'',
+            actions: [
+                { name: '男',val:1 },
+                { name: '女',val:0 },
+      ],
     }
   },
   components:{
@@ -64,18 +87,22 @@ export default {
         post_upload(fromdata).then(res => {
           this.userinfo.head_img = res.data.url
           if(res.data.code == 200) {
+             this.$msg.success(res.data.msg)
              this.update_userinfo()
           }
         })
     },
     //修改昵称
-    UpdateName() {
-      console.log(1);
-      
+    HandleName() {
+     this.userinfo.name = this.content
+     this.update_userinfo()
+     this.content = ''
     },
     //修改性别
-    UpdateGender() {
-
+    HandleGender(val) {
+     this.userinfo.gender = val.val
+     this.update_userinfo()
+     this.gendershow = false
     },
     //修改出生日期
     UpdateDate() {
