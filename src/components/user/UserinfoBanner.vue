@@ -1,5 +1,5 @@
 <template>
-  <div class="userinfo-banner" :class="{active:icos}">
+  <div class="userinfo-banner" :class="{active:icos}" @click="UpdateInfoHandle">
       <div>{{left}}</div>
       <div>
           <span>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-    props:['left','info','icos']
+    props:['left','info','icos'],
+    methods:{
+        UpdateInfoHandle() {
+            this.$emit('UpdateInfoHandle')
+        }
+    }
 }
 </script>
 

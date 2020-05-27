@@ -6,21 +6,31 @@
         left-arrow
         @click-left="$router.back()"
       />
+
       <loading v-if="loadingShow" />
+
       <div v-if="!loadingShow">
+
           <div style="margin:2.778vw 0;">
-          <userinfo-banner left="头像">
-            <img v-if="userinfo.head_img" :src="userinfo.head_img" slot="right" alt="">
-            <img src="@/assets/img/user_img.png" v-else slot="right" alt="">
-          </userinfo-banner>
-            <userinfo-banner left="昵称" :info="userinfo.head_img"></userinfo-banner>
-            <userinfo-banner left="账号" :info="userinfo.username" :icos="true"></userinfo-banner>
-            <userinfo-banner left="邮箱" :info="userinfo.email"></userinfo-banner>
+              <!-- 头像上传 -->
+            <div class="uploadfile">
+              <van-uploader class="uploadimg" preview-size="100vw" :before-read="beforeRead" />
+              <userinfo-banner left="头像">
+                <img v-if="userinfo.head_img" :src="reqbaseURL +  userinfo.head_img" slot="right" alt="">
+                <img src="@/assets/img/user_img.png" v-else slot="right" alt="">
+              </userinfo-banner>
+            </div>
+            <!-- 修改昵称 -->
+            <userinfo-banner left="昵称" :info="userinfo.name" @UpdateInfoHandle="UpdateName" />
+            
+            <userinfo-banner left="账号" :info="userinfo.username" :icos="true" />
+            <userinfo-banner left="邮箱" :info="userinfo.email" :icos="true"></userinfo-banner>
           </div>
+
           <div style="margin:2.778vw 0;">
-            <userinfo-banner left="性别" :info="userinfo ? '男' : '女'"></userinfo-banner>
-            <userinfo-banner left="出生日期" :info="userinfo.birth_date"></userinfo-banner>
-            <userinfo-banner left="信用分" :info="userinfo.xinyong"></userinfo-banner>
+            <userinfo-banner left="性别" :info="userinfo ? '男' : '女'" @UpdateInfoHandle="UpdateGender" />
+            <userinfo-banner left="出生日期" :info="userinfo.birth_date" @UpdateInfoHandle="UpdateDate" />
+            <userinfo-banner left="信用分" :info="userinfo.xinyong" :icos="true" />
           </div>
       </div>
   </div>
@@ -29,7 +39,8 @@
 <script>
 import UserinfoBanner from '@/components/user/UserinfoBanner'
 import loading from '@/components/common/loading.vue'
-import { get_webuserinfo } from '@/api/user.js'
+import { get_webuserinfo,post_upload,update_info } from '@/api/user.js'
+import request from '@/http/request'
 export default {
   data() {
     return {
@@ -40,6 +51,48 @@ export default {
   components:{
     UserinfoBanner,
     loading
+  },
+  methods:{
+    //头像上传
+    beforeRead(file) {
+        if (file.type != 'image/jpeg' && file.type != 'image/png') {
+          this.$msg.fail('请上传jpg png格式图片');
+          return false;
+        }
+        const fromdata = new FormData()
+        fromdata.append('file',file)
+        post_upload(fromdata).then(res => {
+          this.userinfo.head_img = res.data.url
+          if(res.data.code == 200) {
+             this.update_userinfo()
+          }
+        })
+    },
+    //修改昵称
+    UpdateName() {
+      console.log(1);
+      
+    },
+    //修改性别
+    UpdateGender() {
+
+    },
+    //修改出生日期
+    UpdateDate() {
+
+    },
+    //修改个人资料信息
+    update_userinfo() {
+      update_info(localStorage.getItem('userId'),this.userinfo).then(res => {
+        console.log(res);
+      })
+    }
+    
+  },
+  computed:{
+    reqbaseURL() {
+      return request.defaults.baseURL
+    }
   },
   mounted() {
     setTimeout(() => {
@@ -56,5 +109,13 @@ export default {
 .userinfo{
   background-color: #ebeced;
   height: 100vh;
+  .uploadfile{
+    position: relative;
+    overflow: hidden;
+    .uploadimg{
+      opacity: 0;
+      position: absolute;
+    }
+  }
 }
 </style>

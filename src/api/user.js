@@ -33,3 +33,23 @@ export const get_webuserinfo = (id) => {
         }
     })
 }
+
+
+//上传头像
+export const post_upload = (fromdata) => {
+    return request({
+        method:'post',
+        url:'/v1/upload',
+        data:fromdata
+    })
+}
+
+
+//修改个人资料
+export const update_info = (id,infoobj) => {
+    return request({
+        method:'post',
+        url:'/v1/update_info/' + id,
+        data:infoobj
+    })
+}
