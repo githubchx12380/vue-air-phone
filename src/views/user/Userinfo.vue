@@ -29,11 +29,11 @@
 
           <div style="margin:2.778vw 0;">
             <userinfo-banner left="性别" :info="userinfo.gender ? '男' : '女'" @UpdateInfoHandle="gendershow = true" />
-            <userinfo-banner left="出生日期" :info="userinfo.birth_date" @UpdateInfoHandle="UpdateDate" />
+            <userinfo-banner left="出生日期" :info="userinfo.birth_date" @UpdateInfoHandle="dateshow = true" />
             <userinfo-banner left="信用分" :info="userinfo.xinyong" :icos="true" />
           </div>
       </div>
-      <!-- 昵称 -->
+         <!-- 昵称 -->
           <van-dialog v-model="nameshow" 
                 title="昵称" 
                 show-cancel-button 
@@ -42,8 +42,19 @@
                 >
               <van-field v-model="content"  autofocus />
           </van-dialog>
-
-
+          <!-- 出生日期 -->
+          
+          <van-action-sheet v-model="dateshow">
+                  <van-datetime-picker
+                      v-model="currentDate"
+                      type="date"
+                      title="选择年月日"
+                      @confirm="UpdateDate"
+                      @cancel="dateshow = false"
+                      :min-date="minDate"
+                      :max-date="maxDate"
+                    />
+          </van-action-sheet>
          
         
 
@@ -56,18 +67,22 @@ import UserinfoBanner from '@/components/user/UserinfoBanner'
 import loading from '@/components/common/loading.vue'
 import { get_webuserinfo,post_upload,update_info } from '@/api/user.js'
 import request from '@/http/request'
+import moment from 'moment'
 export default {
   data() {
     return {
+      minDate: new Date(1900, 1, 1),
+      maxDate: new Date(2020, 5, 1),
+      currentDate: new Date(),
       userinfo:{},
       loadingShow:true,
-       show:false,
-            nameshow:false,
-            gendershow:false,
-            content:'',
-            actions: [
-                { name: '男',val:1 },
-                { name: '女',val:0 },
+      nameshow:false,
+      gendershow:false,
+      dateshow:false,
+      content:'',
+      actions: [
+          { name: '男',val:1 },
+          { name: '女',val:0 },
       ],
     }
   },
@@ -104,9 +119,12 @@ export default {
      this.update_userinfo()
      this.gendershow = false
     },
+    
     //修改出生日期
-    UpdateDate() {
-
+    UpdateDate(date) {
+    this.userinfo.birth_date = moment(date).format('YYYY-MM-DD')
+    this.update_userinfo()
+    this.dateshow = false
     },
     //修改个人资料信息
     update_userinfo() {
