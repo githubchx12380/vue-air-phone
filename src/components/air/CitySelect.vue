@@ -19,7 +19,7 @@
         color="linear-gradient(to right, #05e4db, #00bee1)"
     >搜索</van-button>
 
-    <div class="city-cart"><van-icon class="comment-o" name="comment-o" />我的订单</div>
+    <div class="city-cart"  @click="$router.push('/air/cart')"><van-icon class="comment-o" name="comment-o"  />我的订单</div>
 
     <van-popup v-model="showPicker" round position="bottom">
       <van-picker

@@ -45,10 +45,19 @@ export default {
       loadingShow:true,
       active:0,
       orderResult:[],
+      falg:true
     }
   },
   components:{
     loading
+  },
+  methods: {
+    bannerNum() {
+     if(this.falg) {
+        this.active = Number(this.$route.query.banner)
+        this.falg = false
+     }
+    }
   },
   watch:{
     active:{
@@ -57,6 +66,9 @@ export default {
           setTimeout(() => {
             this.loadingShow = false
           },500)
+          if(this.$route.query.banner) {
+            this.bannerNum(this.falg)
+          }
           //查询所有订单
           if(this.active == 0) {
             get_orderinfo(localStorage.getItem('userId')).then(res => {
@@ -69,10 +81,12 @@ export default {
               buy_state:this.active,
               id:localStorage.getItem('userId')
             }).then(res => {
-              
               this.orderResult = [...res.data.data]
-              
             })
+          }
+          //获取退款单数据
+          if(this.active == 3) {
+            
           }
 
       },

@@ -24,7 +24,7 @@
       <div class="order-item">
         <my-banner-item icos="balance-list-o" @click.native="$router.push('/myorder')" backcolor="#4fc3f7" title="我的订单" />
 
-        <my-banner-item icos="cash-back-record" @click.native="$router.push('/quitorder')" backcolor="#ffa21f" title="我的退款" />
+        <my-banner-item icos="cash-back-record" @click.native="routerPushOrder" backcolor="#ffa21f" title="我的退款" />
 
         <my-banner-item icos="records" backcolor="#ffa21f" title="我的发票" />
         
@@ -45,6 +45,11 @@ export default {
     props:['userinfo'],
     components:{
         MyBannerItem
+    },
+    methods:{
+        routerPushOrder() {
+            this.$router.push('/myorder?banner=3')
+        }
     }
 }
 </script>

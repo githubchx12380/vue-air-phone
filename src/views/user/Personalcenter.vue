@@ -8,7 +8,7 @@
           <img src="../../assets/img/head_img.png" alt />
         </div>
         <p>
-          <span @click="$router.push('/login')">登录</span>
+          <span @click="$router.push('/login')">登录/</span>
           <span @click="$router.push('register')">注册</span>
         </p>
       </div>
@@ -18,10 +18,10 @@
       <img class="back-img" src="@/assets/img/myprofile-back.jpg" alt />
       <div class="head_img">
         <div class="img">
-          <img v-if="userinfo.head_img" :src="userinfo.head_img" alt="">
+          <img v-if="userinfo.head_img" :src="baseurl + userinfo.head_img" alt="">
           <img v-else src="@/assets/img/user_img.png" alt />
         </div>
-        <p >
+        <p style="margin-top:5px;">
           <span @click="$router.push('/userinfo')">
             {{userinfo.name ? userinfo.name : '还没有名字'}}
           </span>
@@ -38,6 +38,7 @@ import NavBar from "@/components/air/NavBar.vue";
 import MyBanner from "@/components/user/MyBanner.vue";
 import loading from "@/components/common/loading.vue";
 import { get_webuserinfo } from '@/api/user.js'
+import request from '@/http/request'
 export default {
   data() {
     return {
@@ -48,6 +49,11 @@ export default {
     NavBar,
     MyBanner,
     loading
+  },
+  computed:{
+    baseurl() {
+      return request.defaults.baseURL
+    }
   },
   mounted() {
     if(localStorage.getItem('token')) {
@@ -88,6 +94,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        border-radius: 50%;
       }
     }
     p {

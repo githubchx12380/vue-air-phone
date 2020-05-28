@@ -22,6 +22,8 @@
       errorMessage="密码为6到18位"
     />
 
+
+
     <!-- 按钮 -->
     <AuthButton text="登录" @clickbtn="sendVal" />
 
@@ -37,7 +39,7 @@ import { userLogin } from "@/api/user.js";
 export default {
   components: {
     AuthInput,
-    AuthButton
+    AuthButton,
   },
   data() {
     return {
