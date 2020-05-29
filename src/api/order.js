@@ -38,3 +38,12 @@ export const del_order = (obj) => {
     })
 }
 
+
+//获取订单号
+export const get_orderNo = (obj) => {
+    return request({
+        url:'/v2/get_orderNo',
+        params:obj
+    })
+}
+

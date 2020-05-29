@@ -70,6 +70,13 @@ export default {
         this.$msg.fail('请先登录')
         return
       }
+      this.$router.push({
+        path:'/paymoney',
+        query:{
+          id:id,
+        }
+      })
+      
     },
     //删除购物车商品
     deleteCartItem(index,buy_date) {

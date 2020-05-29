@@ -97,6 +97,15 @@ const routes = [
     meta: {
       isNavbar: true
     },
+  },
+  {
+    path:'/paymoney',
+    name:'paymoney',
+    component:() => import('@/views/cart/Paymoney.vue'),
+    meta:{
+      isNavbar:true,
+      istoken:true
+    }
   }
 ]
 
