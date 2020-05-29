@@ -72,7 +72,15 @@ const routes = [
   },
   {
     path:'/strat',
-    component:() => import('@/views/strat/index.vue')
+    component:() => import('@/views/strat/index.vue'),
+  },
+  {
+    path:'/strat/:id.html',
+    component:() => import('@/views/strat/detail.vue'),
+    props:true,
+    meta:{
+      isNavbar:true
+    }
   },
   {
     path: '/login',

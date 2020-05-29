@@ -1,6 +1,7 @@
 <template>
   <div class="cart">
     <van-nav-bar
+      class="nav-bar"
       style="margin-bottom:2.778vw;"
       title="订单"
       :right-text="orderLogin"
@@ -113,6 +114,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.nav-bar{
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+}
 .cart{
   margin-bottom: 19.444vw;
 }
