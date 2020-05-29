@@ -1,39 +1,68 @@
 <template>
   <div class="cover">
-      <van-row>
+      <van-row v-if="coverItem.img">
           <van-col span="15" class="cover-title">
-              <div class="title">西安再现以克论净？官方称3年前实施未间断，每月抽查，环卫工人：一个月被罚三次</div>
-              <div class="date">2020-04-26</div>
+              <div class="title">{{coverItem.title}}</div>
+              <div class="date">{{coverItem.date}}</div>
           </van-col>
           <van-col span="9" class="cover-img">
-              <img src="https://p3.pstatp.com/list/pgc-image/S0LlrV01rKAajz" alt="">
+              <img :src="coverItem.img" alt="">
           </van-col>
+      </van-row>
+      <van-row v-else class="cover-title-else">
+         <div class="title">{{coverItem.title}}</div>
+         <div class="date">{{coverItem.date}}</div>
       </van-row>
   </div>
 </template>
 
 <script>
 export default {
+    props:['coverItem']
 
 }
 </script>
 
 <style scoped lang="less">
 .cover{
-    padding: 10px 10px;
+    padding: 4.723vw 2.778vw;
 }
 .cover-img{
     img{
         width: 90%;
-       
+       border-radius: 2px;
     }
 }
 .cover-title{
-    padding: 0 5px;
+    padding: 0 1.389vw;
     .title{
-        margin: 3px 0;
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal!important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        margin: 0.833vw 0 1.389vw 0;
     }
     .date{
+        font-size: 3.333vw;
+        color: #999;
+    }
+}
+.cover-title-else{
+    .title{
+         display: -webkit-box;
+        overflow: hidden;
+        white-space: normal!important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin: 0.833vw 0 1.389vw 0;
+    }
+    .date{
+         font-size: 3.333vw;
         color: #999;
     }
 }
