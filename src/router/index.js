@@ -70,7 +70,10 @@ const routes = [
       istoken:true
     }
   },
-  
+  {
+    path:'/strat',
+    component:() => import('@/views/strat/index.vue')
+  },
   {
     path: '/login',
     name: 'login',

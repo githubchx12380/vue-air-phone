@@ -26,7 +26,7 @@
 
         <my-banner-item icos="cash-back-record" @click.native="routerPushOrder" backcolor="#ffa21f" title="我的退款" />
 
-        <my-banner-item icos="records" backcolor="#ffa21f" title="我的发票" />
+        <my-banner-item icos="records" backcolor="#ffa21f" title="我的优惠" />
         
         <my-banner-item icos="debit-pay" backcolor="#ffa21f" title="我的攻略" />
       </div>
