@@ -9,7 +9,7 @@
     />
     <van-notice-bar text="本项目纯属小打小闹,如购买真实机票,请认准各大机票网站!" left-icon="volume-o" />
     
-    <paymoney-info></paymoney-info>
+    <paymoney-info :flightInfo="flightInfo"></paymoney-info>
   </div>
 </template>
 
@@ -31,7 +31,6 @@ export default {
             order_id:this.$route.query.id
         }
         get_orderNo(obj).then(res => {
-            console.log(res);
             
             if(res.data.code == 301) {
                 setTimeout(() => {
