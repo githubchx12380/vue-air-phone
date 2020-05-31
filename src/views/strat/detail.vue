@@ -47,7 +47,6 @@ export default {
     padding-bottom: 50px;
     .nav-bar{
         width: 100%;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
     }
 }
 .detailItem{
