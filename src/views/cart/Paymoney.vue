@@ -9,13 +9,14 @@
     />
     <van-notice-bar text="本项目纯属小打小闹,如购买真实机票,请认准各大机票网站!" left-icon="volume-o" />
     
-    <paymoney-info :flightInfo="flightInfo"></paymoney-info>
+    <paymoney-info @SubmitPayMoney="SubmitPayMoney" :flightInfo="flightInfo"></paymoney-info>
   </div>
 </template>
 
 <script>
 import { get_orderNo } from '@/api/order'
 import PaymoneyInfo from '@/components/Pay/paymoneyInfo'
+import { Submit_PayMoney } from '@/api/order'
 export default {
     data() {
         return {
@@ -24,6 +25,17 @@ export default {
     },
     components:{
         PaymoneyInfo
+    },
+    methods:{
+        SubmitPayMoney() {
+            let obj = {
+                user_id:localStorage.getItem('userId'),
+                order_id:this.$route.query.id
+            }    
+            Submit_PayMoney(obj).then(res => {
+
+            })
+        }
     },
     mounted() {
         let obj = {

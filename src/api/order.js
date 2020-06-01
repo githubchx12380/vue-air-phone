@@ -47,3 +47,11 @@ export const get_orderNo = (obj) => {
     })
 }
 
+//支付订单
+export const Submit_PayMoney = (obj) => {
+    return request({
+        url:'/v2/SubmitPayMoney',
+        params:obj
+    })
+}
+

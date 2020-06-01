@@ -10,6 +10,8 @@
           <van-col span="8" class="city_middle">------------------➤</van-col>
           <van-col span="8" class="arr_city">{{flightInfo.arr}}</van-col>
         </van-row>
+         <h3>总价格:</h3>
+         <div class="dep_date">{{flightInfo.allprice}}</div>
         <h3>出发时间:</h3>
         <van-row class="dep_date">{{flightInfo.depDate}}</van-row>
         <h3>出行人员机票信息</h3>
@@ -80,7 +82,8 @@ export default {
           return
       }
       if(this.value.length == 6 && this.value == '112233') {
-          this.$msg.fail('支付成功')
+          this.$msg.success('密码正确,正在支付中')
+          this.$emit('SubmitPayMoney')
           return
       }
     },
