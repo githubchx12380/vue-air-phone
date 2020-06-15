@@ -10,7 +10,7 @@
       :left-arrow="leftico" 
       >
         <template #right>
-          <van-icon name="service-o" size="18" />
+          <van-icon @click="$router.push('/chat')" name="service-o" size="18" />
         </template>
       </van-nav-bar>
      </van-sticky> 

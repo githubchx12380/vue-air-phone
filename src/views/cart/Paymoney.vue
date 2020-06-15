@@ -33,7 +33,7 @@ export default {
                 order_id:this.$route.query.id
             }    
             Submit_PayMoney(obj).then(res => {
-
+                console.log(Nadang)
             })
         }
     },
