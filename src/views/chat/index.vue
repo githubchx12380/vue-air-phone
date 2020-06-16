@@ -5,9 +5,8 @@
       <van-icon size="20" color="black" slot="right" name="ellipsis" />
     </van-nav-bar>
 
-      <van-pull-refresh class="refresh" v-model="isLoading" @refresh="onRefresh">
+      <van-pull-refresh ref="refresh" class="refresh" v-model="isLoading" @refresh="onRefresh">
         <div ref="ref_chatbox" v-for="(item,index) in $store.state.chat.list" :key="index">
-          
           <div class="chat_zi" v-if="item.webuser_id == userId ">
             <div class="chat_main">
               <p class="name">{{item.name || '暂无'}}</p>
@@ -25,7 +24,6 @@
             </div>
           </div>
         </div>
-     
       </van-pull-refresh>
     <div class="char_bom">
       <div>
@@ -73,16 +71,14 @@ export default {
     emitValue() {
       emitContent(this.value)
       this.value = ''
-      let lennew = this.$store.state.chat.list.length
-      let len = this.$store.state.chat.list.length - 1
-      console.log(this.$refs.ref_chatbox);
-      this.$refs.ref_chatbox[len].scrollIntoView(false)
-      
+      setTimeout(() => {
+        this.$refs.ref_chatbox && this.$refs.ref_chatbox.pop().scrollIntoView(false)
+      })
     },
     
   },
   mounted() {
-   
+    this.$refs.ref_chatbox && this.$refs.ref_chatbox.pop().scrollIntoView(false)
     now()
   },
   beforeDestroy() {
@@ -99,10 +95,10 @@ export default {
     border-bottom: 0.278vw solid #eee;
   }
    .refresh {
-    overflow: auto;
-    margin:12.778vw 0 13.889vw 0;
+    margin:12.778vw 0 12.778vw 0;
     padding: 2.778vw;
-    height: calc(100vh - 12.778vw - 14.444vw);
+    overflow:auto;
+    height: calc(100vh - 12.778vw - 13.889vw);
       .chat_br {
         margin-bottom: 4.167vw;
         display: flex;

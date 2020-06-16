@@ -115,6 +115,15 @@ const routes = [
       isNavbar:true,
       istoken:true
     }
+  },
+  {
+    path:'/chatlist',
+    name:'chat',
+    component:() => import('@/views/chat/chatlist'),
+    meta:{
+      isNavbar:true,
+      istoken:true
+    }
   }
 ]
 
