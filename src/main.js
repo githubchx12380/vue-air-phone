@@ -16,6 +16,9 @@ import 'vant/lib/index.css';
 
 import { Toast } from 'vant'
 
+
+
+
 Vue.prototype.$msg = Toast
 
 Vue.use(animated)

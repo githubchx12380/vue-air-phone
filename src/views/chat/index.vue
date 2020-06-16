@@ -6,30 +6,37 @@
     </van-nav-bar>
 
       <van-pull-refresh class="refresh" v-model="isLoading" @refresh="onRefresh">
-        <div class="chat_br">
-          <img src="../../assets/img/head_img.png" alt />
-          <div class="chat_main">
-            <p class="name">李某</p>
-            <p class="content">你说什么呢我来个擦水水</p>
+        <div ref="ref_chatbox" v-for="(item,index) in $store.state.chat.list" :key="index">
+          
+          <div class="chat_zi" v-if="item.webuser_id == userId ">
+            <div class="chat_main">
+              <p class="name">{{item.name || '暂无'}}</p>
+              <p class="content">{{item.value}}</p>
+            </div>
+            <img v-if="item.head_img" :src="baseUrl + item.head_img" alt />
+            <img v-else src="../../assets/img/head_img.png"  alt />
           </div>
-        </div>
-        <div class="chat_zi">
-          <div class="chat_main">
-            <p class="name">李某</p>
-            <p class="content">你说什么呢我来个擦水水</p>
+            <div class="chat_br" v-else>
+             <img v-if="item.head_img" :src="baseUrl + item.head_img" alt />
+             <img v-else src="../../assets/img/head_img.png"  alt />
+            <div class="chat_main">
+               <p class="name">{{item.name || '暂无'}}</p>
+                <p class="content">{{item.value}}</p>
+            </div>
           </div>
-          <img src="../../assets/img/head_img.png" alt />
         </div>
      
       </van-pull-refresh>
-
     <div class="char_bom">
       <div>
         <van-icon class="icons" name="smile-o" />
         <van-icon class="icons" name="add-o" /> 
       </div>
       <van-field  class="vant_field" v-model="value"  placeholder="请输入内容" />
-      <van-button size="small" color="linear-gradient(to right, #4bb0ff, #6149f6)"
+      <van-button 
+      @click="emitValue"
+      size="small" 
+      color="linear-gradient(to right, #4bb0ff, #6149f6)"
         >发送</van-button
       >
     </div>
@@ -37,22 +44,52 @@
 </template>
 
 <script>
+import { now,line,emitContent,fn } from './socket'
+import request from '../../http/request'
 export default {
   data() {
     return {
       count: 0,
-      isLoading: true
+      isLoading: true,
+      value:'',
+      list:[],
     };
+  },
+  computed:{
+    userId() {
+      return localStorage.getItem('userId')
+    },
+    baseUrl() {
+      return request.defaults.baseURL
+    }
   },
   methods: {
     onRefresh() {
       setTimeout(() => {
         this.isLoading = false;
         this.count++;
-        console.log(11);
       }, 1000);
-    }
-  }
+    },
+    emitValue() {
+      emitContent(this.value)
+      this.value = ''
+      let lennew = this.$store.state.chat.list.length
+      let len = this.$store.state.chat.list.length - 1
+      console.log(this.$refs.ref_chatbox);
+      this.$refs.ref_chatbox[len].scrollIntoView(false)
+      
+    },
+    
+  },
+  mounted() {
+   
+    now()
+  },
+  beforeDestroy() {
+    line()
+  },
+  
+ 
 };
 </script>
 
