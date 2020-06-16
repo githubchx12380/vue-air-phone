@@ -4,8 +4,6 @@ let id = localStorage.getItem('userId')
 
 import store from '../../store/index'
 export const  now = () => {
-    
-    
     socket.emit('now',{msg:'正在输入..',id})
 }
 
@@ -18,10 +16,15 @@ export const emitContent = (value) => {
 } 
 
 socket.on('hehe',data => {
-    console.log(data);
-    
-//   store.commit('chat/ADD_CHAT',data)
+  store.commit('chat/ADD_CHAT',data)
 }) 
 
+
+// 管理员列表
+socket.on('adminlist',data => {
+    console.log(data);
+    
+    store.commit('chat/ADMIN_LISt',data)
+})
 
 

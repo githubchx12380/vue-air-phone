@@ -106,6 +106,7 @@ export default {
           margin-right: 2.778vw;
           width: 11.111vw;
           height: 11.111vw;
+          border-radius: 50%;
         }
         .chat_main {
           padding-right: 16.667vw;
